@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trust+ Company Ranker</title>
+    <style>
+        :root {
+            --bg-main: #f8fafc;
+            --sidebar-bg: #0b132b;
+            --sidebar-accent: #2563eb;
+            --card-bg: #ffffff;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --star-gold: #fbbf24;
+            --green-btn: #10b981;
+            --red-btn: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* View Toggle Logic */
+        .view-page {
+            display: none;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .view-page.active {
+            display: flex;
+        }
+
+        /* ====================
+           PICTURE 1: FRONT PAGE
+           ==================== */
+        #frontPage {
+            justify-content: center;
+            padding: 40px 16px;
+        }
+
+        .front-container {
+            width: 100%;
+            max-width: 650px;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 14px 18px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            margin-bottom: 24px;
+        }
+
+        .search-input {
+            border: none;
+            outline: none;
+            width: 100%;
+            margin: 0 12px;
+            font-size: 1rem;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin-bottom: 30px;
+        }
+
+        .category-card {
+            background: var(--card-bg);
+            border: 1px solid transparent;
+            border-radius: 16px;
+            padding: 18px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            transition: all 0.2s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            border-color: #bfdbfe;
+        }
+
+        .category-card.active {
+            background-color: #ebf5ff;
+            border-color: #2563eb;
+        }
+
+        .category-card .icon { font-size: 2.2rem; margin-bottom: 8px; }
+        .category-card .label { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); line-height: 1.2; }
+
+        .company-results-box {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
+        .company-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid #f1f5f9;
+            cursor: pointer;
+        }
+
+        .company-row:hover { background-color: #f8fafc; }
+        .company-row:last-child { border-bottom: none; }
+
+        /* ====================
+           PICTURE 2: ADMIN DASHBOARD
+           ==================== */
+        #dashboardPage {
+            flex-direction: row;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 240px;
+            background-color: var(--sidebar-bg);
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+            flex-shrink: 0;
+        }
+
+        .brand-header {
+            padding: 0 20px 24px 20px;
+            border-bottom: 1px solid #1e293b;
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-list {
+            list-style: none;
+            margin-top: 16px;
+        }
+
+        .nav-item {
+            padding: 12px 20px;
+            font-size: 0.9rem;
+            color: #94a3b8;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.2s;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background-color: var(--sidebar-accent);
+            color: #ffffff;
+        }
+
+        .badge {
+            background: #1e3a8a;
+            color: #bfdbfe;
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
+
+        /* Main Content Area */
+        .dash-content {
+            flex-grow: 1;
+            padding: 24px 32px;
+            overflow-y: auto;
+        }
+
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .back-link {
+            color: var(--sidebar-accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .company-header-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            margin-bottom: 24px;
+        }
+
+        .company-title-group {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo-box {
+            width: 56px;
+            height: 56px;
+            background: var(--sidebar-bg);
+            color: #fff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .overall-score-box {
+            text-align: right;
+        }
+
+        .stars { color: var(--star-gold); font-size: 1.2rem; }
+        .score-num { font-size: 1.8rem; font-weight: 800; }
+
+        /* Criteria Assessment Sections */
+        .sections-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .eval-section {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .eval-title {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 6px;
+        }
+
+        .action-bar {
+            margin-top: 24px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            color: white;
+        }
+
+        .btn-approve { background-color: var(--green-btn); }
+        .btn-reject { background-color: var(--red-btn); }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================== -->
+    <!-- VIEW 1: FRONT PAGE (CATEGORY GRID & RANKINGS) -->
+    <!-- ============================================== -->
+    <div id="frontPage" class="view-page active">
+        <div class="front-container">
+            <div class="search-container">
+                <span>🔍</span>
+                <input type="text" id="searchInput" class="search-input" placeholder="Search for companies, categories...">
+                <span>🌪️</span>
+            </div>
+
+            <div class="category-grid" id="categoryGrid">
+                <div class="category-card active" data-category="All">
+                    <div class="icon">🌐</div>
+                    <div class="label">All</div>
+                </div>
+                <div class="category-card" data-category="Construction and Real estate">
+                    <div class="icon">🏗️</div>
+                    <div class="label">Construction & Real Estate</div>
+                </div>
+                <div class="category-card" data-category="Hospitals and Clinics">
+                    <div class="icon">🏥</div>
+                    <div class="label">Hospitals & Clinics</div>
+                </div>
+                <div class="category-card" data-category="Schools and Centers">
+                    <div class="icon">🏫</div>
+                    <div class="label">Schools & Centers</div>
+                </div>
+                <div class="category-card" data-category="Restaurants">
+                    <div class="icon">🍽️</div>
+                    <div class="label">Restaurants</div>
+                </div>
+                <div class="category-card" data-category="Banks, Insurance, Exchange and Brokerage">
+                    <div class="icon">🏦</div>
+                    <div class="label">Banks & Financial</div>
+                </div>
+                <div class="category-card" data-category="Retail and Online shopping">
+                    <div class="icon">🛒</div>
+                    <div class="label">Retail & E-Commerce</div>
+                </div>
+                <div class="category-card" data-category="Clothes">
+                    <div class="icon">👕</div>
+                    <div class="label">Clothes & Apparel</div>
+                </div>
+            </div>
+
+            <div class="company-results-box">
+                <h3 style="margin-bottom: 12px; font-size: 1rem;">Ranked Companies</h3>
+                <div id="companyList">
+                    <!-- Dynamic API Items -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ============================================== -->
+    <!-- VIEW 2: TRUST+ ADMIN DASHBOARD (DETAILED VIEW) -->
+    <!-- ============================================== -->
+    <div id="dashboardPage" class="view-page">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <div class="brand-header">
+                🛡️ Trust+
+            </div>
+            <ul class="nav-list">
+                <li class="nav-item" onclick="showView('frontPage')">📊 Dashboard</li>
+                <li class="nav-item active">📥 Submissions <span class="badge">22</span></li>
+                <li class="nav-item">👁️ Review Queue <span class="badge">12</span></li>
+                <li class="nav-item">✅ Approved</li>
+                <li class="nav-item">❌ Rejected</li>
+                <li class="nav-item">🏢 Companies</li>
+                <li class="nav-item">📁 Categories</li>
+                <li class="nav-item">⚙️ Settings</li>
+            </ul>
+        </div>
+
+        <!-- Main Dashboard View -->
+        <div class="dash-content">
+            <div class="top-nav">
+                <a class="back-link" onclick="showView('frontPage')">← Back to Front Page Grid</a>
+                <span style="font-size: 0.85rem; color: var(--text-muted);">Form ID: #9kqQLSxMguQJSV...</span>
+            </div>
+
+            <!-- Header Stats -->
+            <div class="company-header-card">
+                <div class="company-title-group">
+                    <div class="logo-box" id="dashLogo">N</div>
+                    <div>
+                        <h1 id="dashCompanyName" style="font-size: 1.5rem;">TechNova Solutions</h1>
+                        <p id="dashMeta" style="color: var(--text-muted); font-size: 0.85rem; margin-top: 4px;">Software & Technology • 50-100 Employees</p>
+                    </div>
+                </div>
+                <div class="overall-score-box">
+                    <div class="stars">★★★★☆</div>
+                    <div class="score-num"><span id="dashScore">4.2</span><span style="font-size: 1rem; color: var(--text-muted);"> / 5</span></div>
+                </div>
+            </div>
+
+            <!-- Detailed Section Scores -->
+            <h3 style="margin-bottom: 16px; font-size: 1rem;">Rate each section below</h3>
+            <div class="sections-grid">
+                <div class="eval-section">
+                    <div>
+                        <div class="eval-title">1. Fair Minimum Wage</div>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">Pays at least legal minimum wage, zero unfair deductions.</p>
+                    </div>
+                    <div style="text-align: right;">
+                        <span class="stars">★★★★☆</span>
+                        <strong style="margin-left: 8px;">4.2 / 5</strong>
+                    </div>
+                </div>
+
+                <div class="eval-section">
+                    <div>
+                        <div class="eval-title">2. Profit Sharing & Benefits</div>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">Offers profit sharing programs paid regularly.</p>
+                    </div>
+                    <div style="text-align: right;">
+                        <span class="stars">★★★★☆</span>
+                        <strong style="margin-left: 8px;">4.0 / 5</strong>
+                    </div>
+                </div>
+
+                <div class="eval-section">
+                    <div>
+                        <div class="eval-title">3. Health Insurance & Safety</div>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">Provides medical coverage and workplace standards.</p>
+                    </div>
+                    <div style="text-align: right;">
+                        <span class="stars">★★★☆☆</span>
+                        <strong style="margin-left: 8px;">3.8 / 5</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-bar">
+                <button class="btn btn-approve" onclick="showView('frontPage')">Approve Company</button>
+                <button class="btn btn-reject" onclick="showView('frontPage')">Reject Company</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Page Navigation & Backend API Script -->
+    <script>
+        let currentCategory = 'All';
+
+        // Swap between Views
+        function showView(viewId) {
+            document.querySelectorAll('.view-page').forEach(page => page.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+        }
+
+        // Open Dashboard populated with selected company data
+        function openDashboard(companyName, category, score) {
+            document.getElementById('dashCompanyName').innerText = companyName;
+            document.getElementById('dashMeta').innerText = `${category} • Live Ktor API Entry`;
+            document.getElementById('dashScore').innerText = score.toFixed(1);
+            document.getElementById('dashLogo').innerText = companyName.charAt(0).toUpperCase();
+            showView('dashboardPage');
+        }
+
+        // Fetch Companies from Kotlin Ktor Endpoint
+        async function fetchCompanies() {
+            try {
+                const url = currentCategory === 'All' 
+                    ? '/api/companies' 
+                    : `/api/companies?category=${encodeURIComponent(currentCategory)}`;
+                
+                const response = await fetch(url);
+                const companies = await response.json();
+                renderList(companies);
+            } catch (err) {
+                console.error('Failed to load companies:', err);
+            }
+        }
+
+        function renderList(companies) {
+            const listEl = document.getElementById('companyList');
+            const searchVal = document.getElementById('searchInput').value.toLowerCase();
+            
+            const filtered = companies.filter(c => 
+                c.name.toLowerCase().includes(searchVal) || 
+                c.category.toLowerCase().includes(searchVal)
+            );
+
+            if (filtered.length === 0) {
+                listEl.innerHTML = '<div style="padding: 12px 0; color: #94a3b8;">No companies found.</div>';
+                return;
+            }
+
+            listEl.innerHTML = filtered.map(c => `
+                <div class="company-row" onclick="openDashboard('${c.name}', '${c.category}', ${c.score})">
+                    <div>
+                        <strong style="font-size: 0.95rem;">${c.name}</strong>
+                        <div style="font-size: 0.8rem; color: #64748b;">${c.category} • ${c.reviewsCount} reviews</div>
+                    </div>
+                    <div style="background: #fef08a; color: #854d0e; font-weight: 700; font-size: 0.85rem; padding: 4px 8px; border-radius: 6px;">
+                        ★ ${c.score.toFixed(1)}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Event Listeners for Category Grid
+        document.getElementById('categoryGrid').addEventListener('click', (e) => {
+            const card = e.target.closest('.category-card');
+            if (!card) return;
+
+            document.querySelectorAll('.category-card').forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
+            currentCategory = card.dataset.category;
+            fetchCompanies();
+        });
+
+        document.getElementById('searchInput').addEventListener('input', fetchCompanies);
+
+        // Initial Load
+        fetchCompanies();
+    </script>
+</body>
+</html>
