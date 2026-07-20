@@ -32,7 +32,7 @@
             overflow-x: hidden;
         }
 
-        /* View Toggle Logic */
+        /* View Navigation */
         .view-page {
             display: none;
             width: 100%;
@@ -44,7 +44,7 @@
         }
 
         /* ====================
-           PICTURE 1: FRONT PAGE
+           VIEW 1: FRONT PAGE
            ==================== */
         #frontPage {
             justify-content: center;
@@ -53,7 +53,7 @@
 
         .front-container {
             width: 100%;
-            max-width: 650px;
+            max-width: 680px;
         }
 
         .search-container {
@@ -75,6 +75,7 @@
             font-size: 1rem;
         }
 
+        /* 4-Column Grid for Categories */
         .category-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -86,10 +87,11 @@
             background: var(--card-bg);
             border: 1px solid transparent;
             border-radius: 16px;
-            padding: 18px 10px;
+            padding: 16px 8px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             text-align: center;
             cursor: pointer;
             box-shadow: 0 4px 12px rgba(0,0,0,0.03);
@@ -107,8 +109,21 @@
             border-color: #2563eb;
         }
 
-        .category-card .icon { font-size: 2.2rem; margin-bottom: 8px; }
-        .category-card .label { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); line-height: 1.2; }
+        .category-card .icon { 
+            font-size: 2.2rem; 
+            margin-bottom: 8px; 
+        }
+
+        .category-card .label { 
+            font-size: 0.75rem; 
+            font-weight: 600; 
+            color: var(--text-muted); 
+            line-height: 1.25; 
+        }
+
+        .category-card.active .label {
+            color: #1d4ed8;
+        }
 
         .company-results-box {
             background: var(--card-bg);
@@ -130,13 +145,12 @@
         .company-row:last-child { border-bottom: none; }
 
         /* ====================
-           PICTURE 2: ADMIN DASHBOARD
+           VIEW 2: TRUST+ ADMIN DASHBOARD
            ==================== */
         #dashboardPage {
             flex-direction: row;
         }
 
-        /* Sidebar Navigation */
         .sidebar {
             width: 240px;
             background-color: var(--sidebar-bg);
@@ -186,7 +200,6 @@
             border-radius: 12px;
         }
 
-        /* Main Content Area */
         .dash-content {
             flex-grow: 1;
             padding: 24px 32px;
@@ -238,14 +251,10 @@
             font-weight: bold;
         }
 
-        .overall-score-box {
-            text-align: right;
-        }
-
+        .overall-score-box { text-align: right; }
         .stars { color: var(--star-gold); font-size: 1.2rem; }
         .score-num { font-size: 1.8rem; font-weight: 800; }
 
-        /* Criteria Assessment Sections */
         .sections-grid {
             display: grid;
             gap: 16px;
@@ -290,7 +299,7 @@
 <body>
 
     <!-- ============================================== -->
-    <!-- VIEW 1: FRONT PAGE (CATEGORY GRID & RANKINGS) -->
+    <!-- VIEW 1: FRONT PAGE GRID                        -->
     <!-- ============================================== -->
     <div id="frontPage" class="view-page active">
         <div class="front-container">
@@ -300,56 +309,99 @@
                 <span>🌪️</span>
             </div>
 
+            <!-- Complete 19 Categories Matching Image -->
             <div class="category-grid" id="categoryGrid">
                 <div class="category-card active" data-category="All">
                     <div class="icon">🌐</div>
                     <div class="label">All</div>
                 </div>
-                <div class="category-card" data-category="Construction and Real estate">
+                <div class="category-card" data-category="Construction and real estate">
                     <div class="icon">🏗️</div>
-                    <div class="label">Construction & Real Estate</div>
+                    <div class="label">Construction and real estate</div>
                 </div>
-                <div class="category-card" data-category="Hospitals and Clinics">
+                <div class="category-card" data-category="Hospitals and clinics">
                     <div class="icon">🏥</div>
-                    <div class="label">Hospitals & Clinics</div>
+                    <div class="label">Hospitals and clinics</div>
                 </div>
-                <div class="category-card" data-category="Schools and Centers">
+                <div class="category-card" data-category="Schools and centers">
                     <div class="icon">🏫</div>
-                    <div class="label">Schools & Centers</div>
+                    <div class="label">Schools and centers</div>
                 </div>
                 <div class="category-card" data-category="Restaurants">
                     <div class="icon">🍽️</div>
                     <div class="label">Restaurants</div>
                 </div>
-                <div class="category-card" data-category="Banks, Insurance, Exchange and Brokerage">
+                <div class="category-card" data-category="Banks, insurance, exchange and brokerage">
                     <div class="icon">🏦</div>
-                    <div class="label">Banks & Financial</div>
+                    <div class="label">Banks, insurance, exchange and brokerage</div>
                 </div>
-                <div class="category-card" data-category="Retail and Online shopping">
+                <div class="category-card" data-category="Retail and online shopping">
                     <div class="icon">🛒</div>
-                    <div class="label">Retail & E-Commerce</div>
+                    <div class="label">Retail and online shopping</div>
                 </div>
                 <div class="category-card" data-category="Clothes">
                     <div class="icon">👕</div>
-                    <div class="label">Clothes & Apparel</div>
+                    <div class="label">Clothes</div>
+                </div>
+                <div class="category-card" data-category="Farms">
+                    <div class="icon">🚜</div>
+                    <div class="label">Farms</div>
+                </div>
+                <div class="category-card" data-category="Home appliances">
+                    <div class="icon">🧊</div>
+                    <div class="label">Home appliances</div>
+                </div>
+                <div class="category-card" data-category="Public firms">
+                    <div class="icon">🏛️</div>
+                    <div class="label">Public firms</div>
+                </div>
+                <div class="category-card" data-category="International companies">
+                    <div class="icon">🌍</div>
+                    <div class="label">International companies</div>
+                </div>
+                <div class="category-card" data-category="Heavy industries">
+                    <div class="icon">🏭</div>
+                    <div class="label">Heavy industries</div>
+                </div>
+                <div class="category-card" data-category="Communication, software and hardware">
+                    <div class="icon">💻</div>
+                    <div class="label">Communication, software and hardware</div>
+                </div>
+                <div class="category-card" data-category="Petrochemicals and fertelizers">
+                    <div class="icon">🛢️</div>
+                    <div class="label">Petrochemicals and fertelizers</div>
+                </div>
+                <div class="category-card" data-category="Tourism and hotels">
+                    <div class="icon">🏨</div>
+                    <div class="label">Tourism and hotels</div>
+                </div>
+                <div class="category-card" data-category="Cars and transportation">
+                    <div class="icon">🚗</div>
+                    <div class="label">Cars and transportation</div>
+                </div>
+                <div class="category-card" data-category="Administrative offices">
+                    <div class="icon">🪑</div>
+                    <div class="label">Administrative offices</div>
+                </div>
+                <div class="category-card" data-category="Other">
+                    <div class="icon">📦</div>
+                    <div class="label">Other</div>
                 </div>
             </div>
 
             <div class="company-results-box">
                 <h3 style="margin-bottom: 12px; font-size: 1rem;">Ranked Companies</h3>
                 <div id="companyList">
-                    <!-- Dynamic API Items -->
+                    <!-- Dynamic API Items Inject Here -->
                 </div>
             </div>
         </div>
     </div>
 
-
     <!-- ============================================== -->
-    <!-- VIEW 2: TRUST+ ADMIN DASHBOARD (DETAILED VIEW) -->
+    <!-- VIEW 2: TRUST+ ADMIN DASHBOARD                 -->
     <!-- ============================================== -->
     <div id="dashboardPage" class="view-page">
-        <!-- Sidebar Navigation -->
         <div class="sidebar">
             <div class="brand-header">
                 🛡️ Trust+
@@ -366,14 +418,12 @@
             </ul>
         </div>
 
-        <!-- Main Dashboard View -->
         <div class="dash-content">
             <div class="top-nav">
                 <a class="back-link" onclick="showView('frontPage')">← Back to Front Page Grid</a>
                 <span style="font-size: 0.85rem; color: var(--text-muted);">Form ID: #9kqQLSxMguQJSV...</span>
             </div>
 
-            <!-- Header Stats -->
             <div class="company-header-card">
                 <div class="company-title-group">
                     <div class="logo-box" id="dashLogo">N</div>
@@ -388,7 +438,6 @@
                 </div>
             </div>
 
-            <!-- Detailed Section Scores -->
             <h3 style="margin-bottom: 16px; font-size: 1rem;">Rate each section below</h3>
             <div class="sections-grid">
                 <div class="eval-section">
@@ -432,18 +481,15 @@
         </div>
     </div>
 
-
-    <!-- Page Navigation & Backend API Script -->
+    <!-- Script Handling Toggle & Fetch -->
     <script>
         let currentCategory = 'All';
 
-        // Swap between Views
         function showView(viewId) {
             document.querySelectorAll('.view-page').forEach(page => page.classList.remove('active'));
             document.getElementById(viewId).classList.add('active');
         }
 
-        // Open Dashboard populated with selected company data
         function openDashboard(companyName, category, score) {
             document.getElementById('dashCompanyName').innerText = companyName;
             document.getElementById('dashMeta').innerText = `${category} • Live Ktor API Entry`;
@@ -452,7 +498,6 @@
             showView('dashboardPage');
         }
 
-        // Fetch Companies from Kotlin Ktor Endpoint
         async function fetchCompanies() {
             try {
                 const url = currentCategory === 'All' 
@@ -494,7 +539,6 @@
             `).join('');
         }
 
-        // Event Listeners for Category Grid
         document.getElementById('categoryGrid').addEventListener('click', (e) => {
             const card = e.target.closest('.category-card');
             if (!card) return;
@@ -507,7 +551,6 @@
 
         document.getElementById('searchInput').addEventListener('input', fetchCompanies);
 
-        // Initial Load
         fetchCompanies();
     </script>
 </body>
