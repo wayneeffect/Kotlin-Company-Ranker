@@ -1,109 +1,125 @@
 package com.example
 
-import com.example.models.Company
-import com.example.models.CreateCompanyRequest
-import com.example.models.RateCompanyRequest
-import com.example.plugins.InvalidInputException
-import com.example.plugins.ResourceNotFoundException
-import com.example.plugins.configureErrorHandling
-import com.example.plugins.configureSecurity
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import io.ktor.server.plugins.contentnegotiation.*
+import io.ktor.server.plugins.cors.routing.*
+import io.ktor.server.plugins.defaultheaders.*
 import io.ktor.server.plugins.ratelimit.*
+import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import kotlinx.serialization.Serializable
 import java.util.UUID
 import java.util.concurrent.ConcurrentHashMap
+import kotlin.time.Duration.Companion.seconds
 
-// In-Memory Thread-Safe Data Store
+// Models
+@Serializable
+data class Company(val id: String, val name: String, val score: Double, val category: String, val reviewsCount: Int)
+
+@Serializable
+data class CreateCompanyRequest(val name: String, val score: Double, val category: String)
+
+@Serializable
+data class RateCompanyRequest(val score: Double)
+
+@Serializable
+data class ApiErrorResponse(val status: Int, val code: String, val message: String)
+
+// In-Memory Data Store
 val companyStore = ConcurrentHashMap<String, Company>().apply {
-    val initial = listOf(
-        Company("1", "Acme Corp", 4.8, "Tech", 120),
-        Company("2", "Globex", 4.2, "Logistics", 85),
-        Company("3", "Soylent Corp", 3.9, "Biotech", 45),
-        Company("4", "Initech", 4.5, "Software", 210)
-    )
-    initial.forEach { put(it.id, it) }
+    put("1", Company("1", "Acme Corp", 4.8, "Tech", 120))
+    put("2", Company("2", "Globex", 4.2, "Logistics", 85))
 }
 
 fun main() {
     val port = System.getenv("PORT")?.toIntOrNull() ?: 8080
 
-    embeddedServer(Netty, host = "0.0.0.0", port = port, configure = {
-        shutdownGracePeriod = 2000
-        shutdownTimeout = 3000
-    }) {
-        install(ContentNegotiation) {
-            json()
+    embeddedServer(Netty, port = port, host = "0.0.0.0") {
+        // Content Negotiation
+        install(ContentNegotiation) { json() }
+
+        // Security Headers
+        install(DefaultHeaders) {
+            header("X-Content-Type-Options", "nosniff")
+            header("X-Frame-Options", "DENY")
         }
 
-        configureErrorHandling()
-        configureSecurity()
+        // CORS
+        install(CORS) {
+            anyHost()
+            allowHeader(HttpHeaders.ContentType)
+            allowMethod(HttpMethod.Get)
+            allowMethod(HttpMethod.Post)
+        }
 
+        // Rate Limiting
+        install(RateLimit) {
+            register(RateLimitName("public_read")) { rateLimiter(limit = 100, refillPeriod = 60.seconds) }
+            register(RateLimitName("strict_write")) { rateLimiter(limit = 10, refillPeriod = 60.seconds) }
+        }
+
+        // Error Handling
+        install(StatusPages) {
+            exception<Throwable> { call, cause ->
+                call.respond(HttpStatusCode.InternalServerError, ApiErrorResponse(500, "ERROR", cause.message ?: "Server error"))
+            }
+            status(HttpStatusCode.NotFound) { call, status ->
+                call.respond(status, ApiErrorResponse(404, "NOT_FOUND", "Route not found"))
+            }
+        }
+
+        // Routing
         routing {
-            // Healthcheck Endpoint for Render Uptime Monitoring
             get("/health") {
                 call.respond(HttpStatusCode.OK, mapOf("status" to "UP"))
             }
 
             rateLimit(RateLimitName("public_read")) {
-                // GET /api/companies?category=Tech
                 get("/api/companies") {
                     val category = call.request.queryParameters["category"]
                     val ranked = companyStore.values
                         .filter { category.isNullOrBlank() || it.category.equals(category, ignoreCase = true) }
                         .sortedByDescending { it.score }
-                    
                     call.respond(ranked)
                 }
             }
 
             rateLimit(RateLimitName("strict_write")) {
-                // POST /api/companies
                 post("/api/companies") {
-                    val request = runCatching { call.receive<CreateCompanyRequest>() }
-                        .getOrElse { throw InvalidInputException("Malformed request body.") }
-
-                    if (request.name.isBlank()) throw InvalidInputException("Company name cannot be empty.")
-                    if (request.score !in 0.0..5.0) throw InvalidInputException("Score must be between 0.0 and 5.0.")
-
+                    val req = call.receive<CreateCompanyRequest>()
                     val newCompany = Company(
                         id = UUID.randomUUID().toString(),
-                        name = request.name.take(100), // Enforce length limits
-                        score = (request.score * 10).toInt() / 10.0,
-                        category = request.category.take(50),
+                        name = req.name,
+                        score = req.score,
+                        category = req.category,
                         reviewsCount = 1
                     )
-                    
                     companyStore[newCompany.id] = newCompany
                     call.respond(HttpStatusCode.Created, newCompany)
                 }
 
-                // POST /api/companies/{id}/rate
                 post("/api/companies/{id}/rate") {
-                    val id = call.parameters["id"] ?: throw InvalidInputException("Missing company ID.")
-                    val request = runCatching { call.receive<RateCompanyRequest>() }
-                        .getOrElse { throw InvalidInputException("Invalid rating payload.") }
-
-                    if (request.score !in 0.0..5.0) throw InvalidInputException("Score must be between 0.0 and 5.0.")
-
-                    // Atomic Update using ConcurrentHashMap
+                    val id = call.parameters["id"] ?: return@post call.respond(HttpStatusCode.BadRequest)
+                    val req = call.receive<RateCompanyRequest>()
+                    
                     val updated = companyStore.compute(id) { _, existing ->
-                        existing ?: throw ResourceNotFoundException("Company with ID $id not found.")
+                        existing ?: return@compute null
                         val newCount = existing.reviewsCount + 1
-                        val newScore = ((existing.score * existing.reviewsCount) + request.score) / newCount
-                        existing.copy(
-                            score = (newScore * 10).toInt() / 10.0,
-                            reviewsCount = newCount
-                        )
+                        val newScore = ((existing.score * existing.reviewsCount) + req.score) / newCount
+                        existing.copy(score = (newScore * 10).toInt() / 10.0, reviewsCount = newCount)
                     }
 
-                    call.respond(updated!!)
+                    if (updated == null) {
+                        call.respond(HttpStatusCode.NotFound, ApiErrorResponse(404, "NOT_FOUND", "Company not found"))
+                    } else {
+                        call.respond(updated)
+                    }
                 }
             }
         }
