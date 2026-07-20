@@ -4,6 +4,7 @@ import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
+import io.ktor.server.http.content.*
 import io.ktor.server.netty.*
 import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.plugins.cors.routing.*
@@ -18,7 +19,6 @@ import java.util.UUID
 import java.util.concurrent.ConcurrentHashMap
 import kotlin.time.Duration.Companion.seconds
 
-// Models
 @Serializable
 data class Company(val id: String, val name: String, val score: Double, val category: String, val reviewsCount: Int)
 
@@ -31,7 +31,6 @@ data class RateCompanyRequest(val score: Double)
 @Serializable
 data class ApiErrorResponse(val status: Int, val code: String, val message: String)
 
-// In-Memory Data Store
 val companyStore = ConcurrentHashMap<String, Company>().apply {
     put("1", Company("1", "Acme Corp", 4.8, "Tech", 120))
     put("2", Company("2", "Globex", 4.2, "Logistics", 85))
@@ -41,16 +40,13 @@ fun main() {
     val port = System.getenv("PORT")?.toIntOrNull() ?: 8080
 
     embeddedServer(Netty, port = port, host = "0.0.0.0") {
-        // Content Negotiation
         install(ContentNegotiation) { json() }
 
-        // Security Headers
         install(DefaultHeaders) {
             header("X-Content-Type-Options", "nosniff")
             header("X-Frame-Options", "DENY")
         }
 
-        // CORS
         install(CORS) {
             anyHost()
             allowHeader(HttpHeaders.ContentType)
@@ -58,13 +54,11 @@ fun main() {
             allowMethod(HttpMethod.Post)
         }
 
-        // Rate Limiting
         install(RateLimit) {
             register(RateLimitName("public_read")) { rateLimiter(limit = 100, refillPeriod = 60.seconds) }
             register(RateLimitName("strict_write")) { rateLimiter(limit = 10, refillPeriod = 60.seconds) }
         }
 
-        // Error Handling
         install(StatusPages) {
             exception<Throwable> { call, cause ->
                 call.respond(HttpStatusCode.InternalServerError, ApiErrorResponse(500, "ERROR", cause.message ?: "Server error"))
@@ -74,8 +68,14 @@ fun main() {
             }
         }
 
-        // Routing
         routing {
+            // SERVE THE DASHBOARD AT ROOT '/'
+            singlePageApplication {
+                useResources = true
+                filesPath = "static"
+                defaultPage = "index.html"
+            }
+
             get("/health") {
                 call.respond(HttpStatusCode.OK, mapOf("status" to "UP"))
             }
