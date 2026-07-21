@@ -32,7 +32,7 @@
             overflow-x: hidden;
         }
 
-        /* View Navigation */
+        /* View Navigation Logic */
         .view-page {
             display: none;
             width: 100%;
@@ -44,7 +44,7 @@
         }
 
         /* ====================
-           VIEW 1: FRONT PAGE
+           VIEW 1: FRONT PAGE GRID (PHOTO 1)
            ==================== */
         #frontPage {
             justify-content: center;
@@ -75,7 +75,6 @@
             font-size: 1rem;
         }
 
-        /* 4-Column Grid for Categories */
         .category-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -109,21 +108,8 @@
             border-color: #2563eb;
         }
 
-        .category-card .icon { 
-            font-size: 2.2rem; 
-            margin-bottom: 8px; 
-        }
-
-        .category-card .label { 
-            font-size: 0.75rem; 
-            font-weight: 600; 
-            color: var(--text-muted); 
-            line-height: 1.25; 
-        }
-
-        .category-card.active .label {
-            color: #1d4ed8;
-        }
+        .category-card .icon { font-size: 2.2rem; margin-bottom: 8px; }
+        .category-card .label { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); line-height: 1.25; }
 
         .company-results-box {
             background: var(--card-bg);
@@ -145,7 +131,128 @@
         .company-row:last-child { border-bottom: none; }
 
         /* ====================
-           VIEW 2: TRUST+ ADMIN DASHBOARD
+           VIEW 2: COMPANY DETAIL PAGE (PHOTO 3)
+           ==================== */
+        #companyDetailPage {
+            justify-content: center;
+            padding: 40px 16px;
+        }
+
+        .detail-container {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .back-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .back-btn {
+            color: var(--sidebar-accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .public-company-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            border: 1px solid var(--border-color);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .company-meta-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .company-logo-circle {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background: #2563eb;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .topic-card-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .topic-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+
+        .topic-card-left {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .topic-icon-bg {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .bg-green { background-color: #dcfce7; }
+        .bg-purple { background-color: #f3e8ff; }
+        .bg-blue { background-color: #dbeafe; }
+        .bg-red { background-color: #ffe4e6; }
+        .bg-teal { background-color: #ccfbf1; }
+
+        .topic-title { font-weight: 700; font-size: 0.95rem; }
+        .topic-sub { font-size: 0.8rem; font-weight: 600; color: #64748b; margin-bottom: 6px; }
+        
+        .topic-bullets {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .topic-bullets li {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            position: relative;
+            padding-left: 12px;
+            margin-bottom: 2px;
+        }
+
+        .topic-bullets li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #94a3b8;
+        }
+
+        /* ====================
+           VIEW 3: TRUST+ ADMIN DASHBOARD (PHOTO 2)
            ==================== */
         #dashboardPage {
             flex-direction: row;
@@ -171,10 +278,7 @@
             gap: 10px;
         }
 
-        .nav-list {
-            list-style: none;
-            margin-top: 16px;
-        }
+        .nav-list { list-style: none; margin-top: 16px; }
 
         .nav-item {
             padding: 12px 20px;
@@ -184,7 +288,6 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            transition: background 0.2s;
         }
 
         .nav-item:hover, .nav-item.active {
@@ -204,126 +307,6 @@
             flex-grow: 1;
             padding: 24px 32px;
             overflow-y: auto;
-        }
-
-        .top-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-        }
-
-        .back-link {
-            color: var(--sidebar-accent);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .company-header-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid var(--border-color);
-            margin-bottom: 24px;
-        }
-
-        .company-title-group {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .logo-box {
-            width: 56px;
-            height: 56px;
-            background: var(--sidebar-bg);
-            color: #fff;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            font-weight: bold;
-        }
-
-        .overall-score-box { text-align: right; }
-        .stars { color: var(--star-gold); font-size: 1.2rem; }
-        .score-num { font-size: 1.8rem; font-weight: 800; }
-
-        .sections-grid {
-            display: grid;
-            gap: 16px;
-        }
-
-        .eval-section {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
-
-        .eval-section-left {
-            display: flex;
-            gap: 16px;
-            align-items: flex-start;
-        }
-
-        .eval-icon-box {
-            width: 44px;
-            height: 44px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            flex-shrink: 0;
-        }
-
-        .bg-green { background-color: #dcfce7; }
-        .bg-purple { background-color: #f3e8ff; }
-        .bg-blue { background-color: #dbeafe; }
-        .bg-red { background-color: #ffe4e6; }
-        .bg-teal { background-color: #ccfbf1; }
-
-        .eval-title {
-            font-weight: 700;
-            font-size: 1rem;
-            margin-bottom: 6px;
-        }
-
-        .eval-subtitle {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #475569;
-            margin-bottom: 8px;
-        }
-
-        .eval-bullet-list {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .eval-bullet-list li {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 4px;
-            position: relative;
-            padding-left: 14px;
-        }
-
-        .eval-bullet-list li::before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: #94a3b8;
         }
 
         .action-bar {
@@ -349,7 +332,7 @@
 <body>
 
     <!-- ============================================== -->
-    <!-- VIEW 1: FRONT PAGE GRID                        -->
+    <!-- VIEW 1: FRONT PAGE (PHOTO 1)                   -->
     <!-- ============================================== -->
     <div id="frontPage" class="view-page active">
         <div class="front-container">
@@ -359,237 +342,184 @@
                 <span>🌪️</span>
             </div>
 
-            <!-- Complete 19 Categories -->
             <div class="category-grid" id="categoryGrid">
-                <div class="category-card active" data-category="All">
-                    <div class="icon">🌐</div>
-                    <div class="label">All</div>
-                </div>
-                <div class="category-card" data-category="Construction and real estate">
-                    <div class="icon">🏗️</div>
-                    <div class="label">Construction and real estate</div>
-                </div>
-                <div class="category-card" data-category="Hospitals and clinics">
-                    <div class="icon">🏥</div>
-                    <div class="label">Hospitals and clinics</div>
-                </div>
-                <div class="category-card" data-category="Schools and centers">
-                    <div class="icon">🏫</div>
-                    <div class="label">Schools and centers</div>
-                </div>
-                <div class="category-card" data-category="Restaurants">
-                    <div class="icon">🍽️</div>
-                    <div class="label">Restaurants</div>
-                </div>
-                <div class="category-card" data-category="Banks, insurance, exchange and brokerage">
-                    <div class="icon">🏦</div>
-                    <div class="label">Banks, insurance, exchange and brokerage</div>
-                </div>
-                <div class="category-card" data-category="Retail and online shopping">
-                    <div class="icon">🛒</div>
-                    <div class="label">Retail and online shopping</div>
-                </div>
-                <div class="category-card" data-category="Clothes">
-                    <div class="icon">👕</div>
-                    <div class="label">Clothes</div>
-                </div>
-                <div class="category-card" data-category="Farms">
-                    <div class="icon">🚜</div>
-                    <div class="label">Farms</div>
-                </div>
-                <div class="category-card" data-category="Home appliances">
-                    <div class="icon">🧊</div>
-                    <div class="label">Home appliances</div>
-                </div>
-                <div class="category-card" data-category="Public firms">
-                    <div class="icon">🏛️</div>
-                    <div class="label">Public firms</div>
-                </div>
-                <div class="category-card" data-category="International companies">
-                    <div class="icon">🌍</div>
-                    <div class="label">International companies</div>
-                </div>
-                <div class="category-card" data-category="Heavy industries">
-                    <div class="icon">🏭</div>
-                    <div class="label">Heavy industries</div>
-                </div>
-                <div class="category-card" data-category="Communication, software and hardware">
-                    <div class="icon">💻</div>
-                    <div class="label">Communication, software and hardware</div>
-                </div>
-                <div class="category-card" data-category="Petrochemicals and fertelizers">
-                    <div class="icon">🛢️</div>
-                    <div class="label">Petrochemicals and fertelizers</div>
-                </div>
-                <div class="category-card" data-category="Tourism and hotels">
-                    <div class="icon">🏨</div>
-                    <div class="label">Tourism and hotels</div>
-                </div>
-                <div class="category-card" data-category="Cars and transportation">
-                    <div class="icon">🚗</div>
-                    <div class="label">Cars and transportation</div>
-                </div>
-                <div class="category-card" data-category="Administrative offices">
-                    <div class="icon">🪑</div>
-                    <div class="label">Administrative offices</div>
-                </div>
-                <div class="category-card" data-category="Other">
-                    <div class="icon">📦</div>
-                    <div class="label">Other</div>
-                </div>
+                <div class="category-card active" data-category="All"><div class="icon">🌐</div><div class="label">All</div></div>
+                <div class="category-card" data-category="Construction and real estate"><div class="icon">🏗️</div><div class="label">Construction and real estate</div></div>
+                <div class="category-card" data-category="Hospitals and clinics"><div class="icon">🏥</div><div class="label">Hospitals and clinics</div></div>
+                <div class="category-card" data-category="Schools and centers"><div class="icon">🏫</div><div class="label">Schools and centers</div></div>
+                <div class="category-card" data-category="Restaurants"><div class="icon">🍽️</div><div class="label">Restaurants</div></div>
+                <div class="category-card" data-category="Banks, insurance, exchange and brokerage"><div class="icon">🏦</div><div class="label">Banks, insurance, exchange and brokerage</div></div>
+                <div class="category-card" data-category="Retail and online shopping"><div class="icon">🛒</div><div class="label">Retail and online shopping</div></div>
+                <div class="category-card" data-category="Clothes"><div class="icon">👕</div><div class="label">Clothes</div></div>
+                <div class="category-card" data-category="Farms"><div class="icon">🚜</div><div class="label">Farms</div></div>
+                <div class="category-card" data-category="Home appliances"><div class="icon">🧊</div><div class="label">Home appliances</div></div>
+                <div class="category-card" data-category="Public firms"><div class="icon">🏛️</div><div class="label">Public firms</div></div>
+                <div class="category-card" data-category="International companies"><div class="icon">🌍</div><div class="label">International companies</div></div>
+                <div class="category-card" data-category="Heavy industries"><div class="icon">🏭</div><div class="label">Heavy industries</div></div>
+                <div class="category-card" data-category="Communication, software and hardware"><div class="icon">💻</div><div class="label">Communication, software and hardware</div></div>
+                <div class="category-card" data-category="Petrochemicals and fertelizers"><div class="icon">🛢️</div><div class="label">Petrochemicals and fertelizers</div></div>
+                <div class="category-card" data-category="Tourism and hotels"><div class="icon">🏨</div><div class="label">Tourism and hotels</div></div>
+                <div class="category-card" data-category="Cars and transportation"><div class="icon">🚗</div><div class="label">Cars and transportation</div></div>
+                <div class="category-card" data-category="Administrative offices"><div class="icon">🪑</div><div class="label">Administrative offices</div></div>
+                <div class="category-card" data-category="Other"><div class="icon">📦</div><div class="label">Other</div></div>
             </div>
 
             <div class="company-results-box">
                 <h3 style="margin-bottom: 12px; font-size: 1rem;">Ranked Companies</h3>
-                <div id="companyList">
-                    <!-- Dynamic API Items Inject Here -->
-                </div>
+                <div id="companyList"></div>
             </div>
         </div>
     </div>
 
-    <!-- ============================================== -->
-    <!-- VIEW 2: TRUST+ ADMIN DASHBOARD                 -->
-    <!-- ============================================== -->
-    <div id="dashboardPage" class="view-page">
-        <div class="sidebar">
-            <div class="brand-header">
-                🛡️ Trust+
-            </div>
-            <ul class="nav-list">
-                <li class="nav-item" onclick="showView('frontPage')">📊 Dashboard</li>
-                <li class="nav-item active">📥 Submissions <span class="badge">22</span></li>
-                <li class="nav-item">👁️ Review Queue <span class="badge">12</span></li>
-                <li class="nav-item">✅ Approved</li>
-                <li class="nav-item">❌ Rejected</li>
-                <li class="nav-item">🏢 Companies</li>
-                <li class="nav-item">📁 Categories</li>
-                <li class="nav-item">⚙️ Settings</li>
-            </ul>
-        </div>
 
-        <div class="dash-content">
-            <div class="top-nav">
-                <a class="back-link" onclick="showView('frontPage')">← Back to Front Page Grid</a>
-                <span style="font-size: 0.85rem; color: var(--text-muted);">Form ID: #9kqQLSxMguQJSV...</span>
+    <!-- ============================================== -->
+    <!-- VIEW 2: PUBLIC COMPANY DETAILS (PHOTO 3)       -->
+    <!-- ============================================== -->
+    <div id="companyDetailPage" class="view-page">
+        <div class="detail-container">
+            <div class="back-nav">
+                <a class="back-btn" onclick="showView('frontPage')">← Back to Categories</a>
+                <a class="back-btn" onclick="showView('dashboardPage')">Admin Panel →</a>
             </div>
 
-            <div class="company-header-card">
-                <div class="company-title-group">
-                    <div class="logo-box" id="dashLogo">M</div>
+            <div class="public-company-card">
+                <div class="company-meta-left">
+                    <div class="company-logo-circle" id="pubLogo">M</div>
                     <div>
-                        <h1 id="dashCompanyName" style="font-size: 1.5rem;">Meta Platforms, Inc.</h1>
-                        <p id="dashMeta" style="color: var(--text-muted); font-size: 0.85rem; margin-top: 4px;">Menlo Park, California, USA • Technology, Social Media</p>
+                        <h2 id="pubCompanyName" style="font-size: 1.25rem;">Meta Platforms, Inc.</h2>
+                        <div id="pubMeta" style="color: var(--text-muted); font-size: 0.8rem;">Menlo Park, California, USA • Technology, Social Media</div>
                     </div>
                 </div>
-                <div class="overall-score-box">
-                    <div class="stars">★★★★☆</div>
-                    <div class="score-num"><span id="dashScore">4.0</span><span style="font-size: 1rem; color: var(--text-muted);"> / 5</span></div>
-                    <div style="color: #16a34a; font-weight: 600; font-size: 0.85rem;">Very Good</div>
+                <div style="text-align: right;">
+                    <div style="font-size: 1.5rem; font-weight: 800;"><span id="pubScore">4.0</span> <span style="font-size: 0.9rem; color: #94a3b8;">/5</span></div>
+                    <div style="color: #fbbf24; font-size: 0.9rem;">★★★★☆</div>
+                    <div style="color: #16a34a; font-size: 0.75rem; font-weight: 700;">Very Good</div>
                 </div>
             </div>
 
-            <h3 style="margin-bottom: 16px; font-size: 1rem;">Evaluation Topics</h3>
-            <div class="sections-grid">
-                
+            <div class="topic-card-list">
                 <!-- Topic 1 -->
-                <div class="eval-section">
-                    <div class="eval-section-left">
-                        <div class="eval-icon-box bg-green">💰</div>
+                <div class="topic-card">
+                    <div class="topic-card-left">
+                        <div class="topic-icon-bg bg-green">💰</div>
                         <div>
-                            <div class="eval-title">1. Fair minimum wage</div>
-                            <div class="eval-subtitle">(Overload - Required qualification)</div>
-                            <ul class="eval-bullet-list">
+                            <div class="topic-title">1. Fair minimum wage</div>
+                            <div class="topic-sub">(Overload - Required qualification)</div>
+                            <ul class="topic-bullets">
                                 <li>Overload gives 1.5 minimum wage</li>
                                 <li>Required qualification gives 1.5 minimum wage</li>
                             </ul>
                         </div>
                     </div>
-                    <div style="text-align: right; flex-shrink: 0;">
-                        <span class="stars">★★★★☆</span>
-                        <div style="font-weight: 700; margin-top: 4px;">4.0 <span style="font-weight: 400; color: #94a3b8;">/ 5</span></div>
+                    <div style="text-align: right;">
+                        <div style="color: #fbbf24; font-size: 0.9rem;">★★★★☆</div>
+                        <div style="font-weight: 700; font-size: 0.85rem;">4.0 /5</div>
                     </div>
                 </div>
 
                 <!-- Topic 2 -->
-                <div class="eval-section">
-                    <div class="eval-section-left">
-                        <div class="eval-icon-box bg-purple">📊</div>
+                <div class="topic-card">
+                    <div class="topic-card-left">
+                        <div class="topic-icon-bg bg-purple">📊</div>
                         <div>
-                            <div class="eval-title">2. (Profitshare)</div>
-                            <ul class="eval-bullet-list">
+                            <div class="topic-title">2. (Profitshare)</div>
+                            <ul class="topic-bullets" style="margin-top: 4px;">
                                 <li>Gives profitshare for minimum 10%</li>
                             </ul>
                         </div>
                     </div>
-                    <div style="text-align: right; flex-shrink: 0;">
-                        <span class="stars">★★★★☆</span>
-                        <div style="font-weight: 700; margin-top: 4px;">4.0 <span style="font-weight: 400; color: #94a3b8;">/ 5</span></div>
+                    <div style="text-align: right;">
+                        <div style="color: #fbbf24; font-size: 0.9rem;">★★★★☆</div>
+                        <div style="font-weight: 700; font-size: 0.85rem;">4.0 /5</div>
                     </div>
                 </div>
 
                 <!-- Topic 3 -->
-                <div class="eval-section">
-                    <div class="eval-section-left">
-                        <div class="eval-icon-box bg-blue">🕒</div>
+                <div class="topic-card">
+                    <div class="topic-card-left">
+                        <div class="topic-icon-bg bg-blue">🕒</div>
                         <div>
-                            <div class="eval-title">3. Working hours (overtime)</div>
-                            <ul class="eval-bullet-list">
+                            <div class="topic-title">3. Working hours (overtime)</div>
+                            <ul class="topic-bullets" style="margin-top: 4px;">
                                 <li>Overtime the hour by 1.5x for maximum 12 hours</li>
                             </ul>
                         </div>
                     </div>
-                    <div style="text-align: right; flex-shrink: 0;">
-                        <span class="stars">★★★★☆</span>
-                        <div style="font-weight: 700; margin-top: 4px;">4.0 <span style="font-weight: 400; color: #94a3b8;">/ 5</span></div>
+                    <div style="text-align: right;">
+                        <div style="color: #fbbf24; font-size: 0.9rem;">★★★★☆</div>
+                        <div style="font-weight: 700; font-size: 0.85rem;">4.0 /5</div>
                     </div>
                 </div>
 
                 <!-- Topic 4 -->
-                <div class="eval-section">
-                    <div class="eval-section-left">
-                        <div class="eval-icon-box bg-red">👥</div>
+                <div class="topic-card">
+                    <div class="topic-card-left">
+                        <div class="topic-icon-bg bg-red">👥</div>
                         <div>
-                            <div class="eval-title">4. Discrimination in work force</div>
-                            <ul class="eval-bullet-list">
+                            <div class="topic-title">4. Discrimination in work force</div>
+                            <ul class="topic-bullets" style="margin-top: 4px;">
                                 <li>Employs 20% minimum for women or men</li>
                                 <li>Employs 20% minimum for older people than 40 years</li>
                             </ul>
                         </div>
                     </div>
-                    <div style="text-align: right; flex-shrink: 0;">
-                        <span class="stars">★★★★☆</span>
-                        <div style="font-weight: 700; margin-top: 4px;">4.0 <span style="font-weight: 400; color: #94a3b8;">/ 5</span></div>
+                    <div style="text-align: right;">
+                        <div style="color: #fbbf24; font-size: 0.9rem;">★★★★☆</div>
+                        <div style="font-weight: 700; font-size: 0.85rem;">4.0 /5</div>
                     </div>
                 </div>
 
                 <!-- Topic 5 -->
-                <div class="eval-section">
-                    <div class="eval-section-left">
-                        <div class="eval-icon-box bg-teal">🛡️</div>
+                <div class="topic-card">
+                    <div class="topic-card-left">
+                        <div class="topic-icon-bg bg-teal">🛡️</div>
                         <div>
-                            <div class="eval-title">5. Insurance , Securities and Pensions</div>
-                            <ul class="eval-bullet-list">
+                            <div class="topic-title">5. Insurance , Securities and Pensions</div>
+                            <ul class="topic-bullets" style="margin-top: 4px;">
                                 <li>Pays health care</li>
                             </ul>
                         </div>
                     </div>
-                    <div style="text-align: right; flex-shrink: 0;">
-                        <span class="stars">★★★★☆</span>
-                        <div style="font-weight: 700; margin-top: 4px;">4.0 <span style="font-weight: 400; color: #94a3b8;">/ 5</span></div>
+                    <div style="text-align: right;">
+                        <div style="color: #fbbf24; font-size: 0.9rem;">★★★★☆</div>
+                        <div style="font-weight: 700; font-size: 0.85rem;">4.0 /5</div>
                     </div>
                 </div>
-
-            </div>
-
-            <div class="action-bar">
-                <button class="btn btn-approve" onclick="showView('frontPage')">Approve Company</button>
-                <button class="btn btn-reject" onclick="showView('frontPage')">Reject Company</button>
             </div>
         </div>
     </div>
 
-    <!-- Script Handling Toggle & Fetch -->
+
+    <!-- ============================================== -->
+    <!-- VIEW 3: TRUST+ ADMIN DASHBOARD (PHOTO 2)       -->
+    <!-- ============================================== -->
+    <div id="dashboardPage" class="view-page">
+        <div class="sidebar">
+            <div class="brand-header">🛡️ Trust+</div>
+            <ul class="nav-list">
+                <li class="nav-item" onclick="showView('frontPage')">📊 Front Grid</li>
+                <li class="nav-item active">📥 Submissions <span class="badge">22</span></li>
+                <li class="nav-item">👁️ Review Queue <span class="badge">12</span></li>
+                <li class="nav-item">✅ Approved</li>
+                <li class="nav-item">❌ Rejected</li>
+            </ul>
+        </div>
+
+        <div class="dash-content">
+            <div style="margin-bottom: 20px;">
+                <a class="back-btn" onclick="showView('companyDetailPage')">← Back to Company Public Detail View</a>
+            </div>
+            <h2>Admin Review Console</h2>
+            <p style="color: var(--text-muted); margin-top: 8px;">Review, verify and override company evaluation scores.</p>
+            
+            <div class="action-bar" style="margin-top: 40px;">
+                <button class="btn btn-approve" onclick="showView('frontPage')">Approve Submission</button>
+                <button class="btn btn-reject" onclick="showView('frontPage')">Reject Submission</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Handling Transitions & Ktor REST API Fetch -->
     <script>
         let currentCategory = 'All';
 
@@ -598,12 +528,12 @@
             document.getElementById(viewId).classList.add('active');
         }
 
-        function openDashboard(companyName, category, score) {
-            document.getElementById('dashCompanyName').innerText = companyName;
-            document.getElementById('dashMeta').innerText = `${category} • Live Ktor API Entry`;
-            document.getElementById('dashScore').innerText = score.toFixed(1);
-            document.getElementById('dashLogo').innerText = companyName.charAt(0).toUpperCase();
-            showView('dashboardPage');
+        function openCompanyDetails(companyName, category, score) {
+            document.getElementById('pubCompanyName').innerText = companyName;
+            document.getElementById('pubMeta').innerText = `${category} • Live API Data`;
+            document.getElementById('pubScore').innerText = score.toFixed(1);
+            document.getElementById('pubLogo').innerText = companyName.charAt(0).toUpperCase();
+            showView('companyDetailPage');
         }
 
         async function fetchCompanies() {
@@ -635,7 +565,7 @@
             }
 
             listEl.innerHTML = filtered.map(c => `
-                <div class="company-row" onclick="openDashboard('${c.name}', '${c.category}', ${c.score})">
+                <div class="company-row" onclick="openCompanyDetails('${c.name}', '${c.category}', ${c.score})">
                     <div>
                         <strong style="font-size: 0.95rem;">${c.name}</strong>
                         <div style="font-size: 0.8rem; color: #64748b;">${c.category} • ${c.reviewsCount} reviews</div>
