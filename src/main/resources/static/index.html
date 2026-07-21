@@ -43,7 +43,7 @@
         }
 
         /* ============================================== */
-        /* VIEW 1: FRONT PAGE (19 CATEGORIES)             */
+        /* VIEW 1: FRONT PAGE (19 CATEGORY ICONS)         */
         /* ============================================== */
         #frontPage {
             justify-content: center;
@@ -139,7 +139,7 @@
         }
 
         /* ============================================== */
-        /* VIEW 2: TRUST+ ADMIN DASHBOARD VIEW            */
+        /* VIEW 2: TRUST+ ADMIN DASHBOARD (EXACT PHOTO 1) */
         /* ============================================== */
         #dashboardPage {
             flex-direction: row;
@@ -228,7 +228,7 @@
         .company-icon {
             width: 52px;
             height: 52px;
-            background: #000000;
+            background: #0b132b;
             color: #fff;
             border-radius: 12px;
             display: flex;
@@ -332,6 +332,17 @@
             color: #166534;
         }
 
+        .submission-info-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 14px 18px;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .submission-info-box div { margin-bottom: 4px; }
+
         .bottom-actions {
             position: fixed;
             bottom: 0;
@@ -393,7 +404,7 @@
 
 
     <!-- ============================================== -->
-    <!-- VIEW 2: TRUST+ ADMIN DASHBOARD                -->
+    <!-- VIEW 2: TRUST+ ADMIN DASHBOARD (PHOTO 1)       -->
     <!-- ============================================== -->
     <div id="dashboardPage" class="view-page">
         <!-- Sidebar Navigation -->
@@ -571,6 +582,15 @@
                     <div class="ai-summary-box">
                         <strong style="display: block; margin-bottom: 4px;">✨ AI Summary</strong>
                         This company shows good commitment to work standards and employee benefits. Some improvements needed in health insurance and discrimination policies.
+                    </div>
+
+                    <!-- Submission Info -->
+                    <div class="submission-info-box">
+                        <strong style="display: block; margin-bottom: 6px; color: var(--text-dark);">Submission Info</strong>
+                        <div><strong>Submitted By:</strong> info@technova.com</div>
+                        <div><strong>Submitted Date:</strong> May 19, 2025 10:30 AM</div>
+                        <div><strong>Last Updated:</strong> May 19, 2025 10:31 AM</div>
+                        <div><strong>Form ID:</strong> #9kqQLSxMguQJSV...</div>
                     </div>
                 </div>
             </div>
