@@ -32,7 +32,7 @@
             overflow-x: hidden;
         }
 
-        /* View Navigation Logic */
+        /* View Switching */
         .view-page {
             display: none;
             width: 100%;
@@ -43,9 +43,9 @@
             display: flex;
         }
 
-        /* ====================
-           VIEW 1: FRONT PAGE GRID (PHOTO 1)
-           ==================== */
+        /* ============================================== */
+        /* PHOTO 1: FRONT PAGE GRID                       */
+        /* ============================================== */
         #frontPage {
             justify-content: center;
             padding: 40px 16px;
@@ -130,136 +130,15 @@
         .company-row:hover { background-color: #f8fafc; }
         .company-row:last-child { border-bottom: none; }
 
-        /* ====================
-           VIEW 2: COMPANY DETAIL PAGE (PHOTO 3)
-           ==================== */
-        #companyDetailPage {
-            justify-content: center;
-            padding: 40px 16px;
-        }
-
-        .detail-container {
-            width: 100%;
-            max-width: 600px;
-        }
-
-        .back-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-
-        .back-btn {
-            color: var(--sidebar-accent);
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        .public-company-card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            border: 1px solid var(--border-color);
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .company-meta-left {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .company-logo-circle {
-            width: 54px;
-            height: 54px;
-            border-radius: 50%;
-            background: #2563eb;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .topic-card-list {
-            display: grid;
-            gap: 12px;
-        }
-
-        .topic-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-        }
-
-        .topic-card-left {
-            display: flex;
-            align-items: flex-start;
-            gap: 14px;
-        }
-
-        .topic-icon-bg {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            flex-shrink: 0;
-        }
-
-        .bg-green { background-color: #dcfce7; }
-        .bg-purple { background-color: #f3e8ff; }
-        .bg-blue { background-color: #dbeafe; }
-        .bg-red { background-color: #ffe4e6; }
-        .bg-teal { background-color: #ccfbf1; }
-
-        .topic-title { font-weight: 700; font-size: 0.95rem; }
-        .topic-sub { font-size: 0.8rem; font-weight: 600; color: #64748b; margin-bottom: 6px; }
-        
-        .topic-bullets {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .topic-bullets li {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            position: relative;
-            padding-left: 12px;
-            margin-bottom: 2px;
-        }
-
-        .topic-bullets li::before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: #94a3b8;
-        }
-
-        /* ====================
-           VIEW 3: TRUST+ ADMIN DASHBOARD (PHOTO 2)
-           ==================== */
+        /* ============================================== */
+        /* PHOTO 2: TRUST+ ADMIN DASHBOARD                */
+        /* ============================================== */
         #dashboardPage {
             flex-direction: row;
         }
 
         .sidebar {
-            width: 240px;
+            width: 220px;
             background-color: var(--sidebar-bg);
             color: #ffffff;
             display: flex;
@@ -269,20 +148,20 @@
         }
 
         .brand-header {
-            padding: 0 20px 24px 20px;
+            padding: 0 20px 20px 20px;
             border-bottom: 1px solid #1e293b;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 700;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
-        .nav-list { list-style: none; margin-top: 16px; }
+        .nav-list { list-style: none; margin-top: 12px; }
 
         .nav-item {
-            padding: 12px 20px;
-            font-size: 0.9rem;
+            padding: 10px 20px;
+            font-size: 0.85rem;
             color: #94a3b8;
             cursor: pointer;
             display: flex;
@@ -298,41 +177,164 @@
         .badge {
             background: #1e3a8a;
             color: #bfdbfe;
-            font-size: 0.75rem;
-            padding: 2px 8px;
-            border-radius: 12px;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 10px;
         }
 
-        .dash-content {
+        .dash-main-area {
             flex-grow: 1;
-            padding: 24px 32px;
+            padding: 20px 28px;
             overflow-y: auto;
+            background-color: #f8fafc;
         }
 
-        .action-bar {
-            margin-top: 24px;
+        .dash-top-bar {
             display: flex;
-            justify-content: flex-end;
-            gap: 12px;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
         }
+
+        .back-link {
+            color: var(--sidebar-accent);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .dash-grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 20px;
+        }
+
+        .header-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+
+        .header-left { display: flex; align-items: center; gap: 16px; }
+
+        .company-icon {
+            width: 52px;
+            height: 52px;
+            background: var(--sidebar-bg);
+            color: #fff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            font-weight: bold;
+        }
+
+        .overall-score-tag {
+            text-align: right;
+        }
+
+        .stars { color: var(--star-gold); font-size: 1.1rem; }
+        .score-val { font-size: 1.6rem; font-weight: 800; }
+
+        /* Evaluation Cards Layout */
+        .section-cards { display: grid; gap: 14px; }
+
+        .eval-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .eval-card-left { display: flex; gap: 14px; align-items: flex-start; }
+
+        .icon-box {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .bg-green { background-color: #dcfce7; }
+        .bg-purple { background-color: #f3e8ff; }
+        .bg-blue { background-color: #dbeafe; }
+        .bg-red { background-color: #ffe4e6; }
+        .bg-teal { background-color: #ccfbf1; }
+
+        .card-title { font-weight: 700; font-size: 0.95rem; }
+        .card-subtitle { font-size: 0.82rem; font-weight: 600; color: #475569; margin: 2px 0 6px 0; }
+        
+        .card-bullets { list-style: none; padding-left: 0; }
+        .card-bullets li {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            position: relative;
+            padding-left: 12px;
+            margin-bottom: 2px;
+        }
+        .card-bullets li::before { content: "•"; position: absolute; left: 0; color: #94a3b8; }
+
+        /* Right Side Controls */
+        .right-panel-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .decision-title { font-size: 0.9rem; font-weight: 700; margin-bottom: 8px; }
+
+        .action-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 
         .btn {
-            padding: 10px 20px;
+            padding: 10px;
             border-radius: 8px;
             border: none;
             font-weight: 600;
+            font-size: 0.85rem;
             cursor: pointer;
             color: white;
+            text-align: center;
         }
 
         .btn-approve { background-color: var(--green-btn); }
         .btn-reject { background-color: var(--red-btn); }
+
+        .bottom-actions {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            left: 220px;
+            background: #ffffff;
+            border-top: 1px solid var(--border-color);
+            padding: 12px 28px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
     </style>
 </head>
 <body>
 
     <!-- ============================================== -->
-    <!-- VIEW 1: FRONT PAGE (PHOTO 1)                   -->
+    <!-- PHOTO 1: FRONT PAGE CATEGORY GRID              -->
     <!-- ============================================== -->
     <div id="frontPage" class="view-page active">
         <div class="front-container">
@@ -342,6 +344,7 @@
                 <span>🌪️</span>
             </div>
 
+            <!-- Complete 19 Category Blocks -->
             <div class="category-grid" id="categoryGrid">
                 <div class="category-card active" data-category="All"><div class="icon">🌐</div><div class="label">All</div></div>
                 <div class="category-card" data-category="Construction and real estate"><div class="icon">🏗️</div><div class="label">Construction and real estate</div></div>
@@ -373,153 +376,162 @@
 
 
     <!-- ============================================== -->
-    <!-- VIEW 2: PUBLIC COMPANY DETAILS (PHOTO 3)       -->
-    <!-- ============================================== -->
-    <div id="companyDetailPage" class="view-page">
-        <div class="detail-container">
-            <div class="back-nav">
-                <a class="back-btn" onclick="showView('frontPage')">← Back to Categories</a>
-                <a class="back-btn" onclick="showView('dashboardPage')">Admin Panel →</a>
-            </div>
-
-            <div class="public-company-card">
-                <div class="company-meta-left">
-                    <div class="company-logo-circle" id="pubLogo">M</div>
-                    <div>
-                        <h2 id="pubCompanyName" style="font-size: 1.25rem;">Meta Platforms, Inc.</h2>
-                        <div id="pubMeta" style="color: var(--text-muted); font-size: 0.8rem;">Menlo Park, California, USA • Technology, Social Media</div>
-                    </div>
-                </div>
-                <div style="text-align: right;">
-                    <div style="font-size: 1.5rem; font-weight: 800;"><span id="pubScore">4.0</span> <span style="font-size: 0.9rem; color: #94a3b8;">/5</span></div>
-                    <div style="color: #fbbf24; font-size: 0.9rem;">★★★★☆</div>
-                    <div style="color: #16a34a; font-size: 0.75rem; font-weight: 700;">Very Good</div>
-                </div>
-            </div>
-
-            <div class="topic-card-list">
-                <!-- Topic 1 -->
-                <div class="topic-card">
-                    <div class="topic-card-left">
-                        <div class="topic-icon-bg bg-green">💰</div>
-                        <div>
-                            <div class="topic-title">1. Fair minimum wage</div>
-                            <div class="topic-sub">(Overload - Required qualification)</div>
-                            <ul class="topic-bullets">
-                                <li>Overload gives 1.5 minimum wage</li>
-                                <li>Required qualification gives 1.5 minimum wage</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div style="text-align: right;">
-                        <div style="color: #fbbf24; font-size: 0.9rem;">★★★★☆</div>
-                        <div style="font-weight: 700; font-size: 0.85rem;">4.0 /5</div>
-                    </div>
-                </div>
-
-                <!-- Topic 2 -->
-                <div class="topic-card">
-                    <div class="topic-card-left">
-                        <div class="topic-icon-bg bg-purple">📊</div>
-                        <div>
-                            <div class="topic-title">2. (Profitshare)</div>
-                            <ul class="topic-bullets" style="margin-top: 4px;">
-                                <li>Gives profitshare for minimum 10%</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div style="text-align: right;">
-                        <div style="color: #fbbf24; font-size: 0.9rem;">★★★★☆</div>
-                        <div style="font-weight: 700; font-size: 0.85rem;">4.0 /5</div>
-                    </div>
-                </div>
-
-                <!-- Topic 3 -->
-                <div class="topic-card">
-                    <div class="topic-card-left">
-                        <div class="topic-icon-bg bg-blue">🕒</div>
-                        <div>
-                            <div class="topic-title">3. Working hours (overtime)</div>
-                            <ul class="topic-bullets" style="margin-top: 4px;">
-                                <li>Overtime the hour by 1.5x for maximum 12 hours</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div style="text-align: right;">
-                        <div style="color: #fbbf24; font-size: 0.9rem;">★★★★☆</div>
-                        <div style="font-weight: 700; font-size: 0.85rem;">4.0 /5</div>
-                    </div>
-                </div>
-
-                <!-- Topic 4 -->
-                <div class="topic-card">
-                    <div class="topic-card-left">
-                        <div class="topic-icon-bg bg-red">👥</div>
-                        <div>
-                            <div class="topic-title">4. Discrimination in work force</div>
-                            <ul class="topic-bullets" style="margin-top: 4px;">
-                                <li>Employs 20% minimum for women or men</li>
-                                <li>Employs 20% minimum for older people than 40 years</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div style="text-align: right;">
-                        <div style="color: #fbbf24; font-size: 0.9rem;">★★★★☆</div>
-                        <div style="font-weight: 700; font-size: 0.85rem;">4.0 /5</div>
-                    </div>
-                </div>
-
-                <!-- Topic 5 -->
-                <div class="topic-card">
-                    <div class="topic-card-left">
-                        <div class="topic-icon-bg bg-teal">🛡️</div>
-                        <div>
-                            <div class="topic-title">5. Insurance , Securities and Pensions</div>
-                            <ul class="topic-bullets" style="margin-top: 4px;">
-                                <li>Pays health care</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div style="text-align: right;">
-                        <div style="color: #fbbf24; font-size: 0.9rem;">★★★★☆</div>
-                        <div style="font-weight: 700; font-size: 0.85rem;">4.0 /5</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- ============================================== -->
-    <!-- VIEW 3: TRUST+ ADMIN DASHBOARD (PHOTO 2)       -->
+    <!-- PHOTO 2: TRUST+ ADMIN DASHBOARD VIEW           -->
     <!-- ============================================== -->
     <div id="dashboardPage" class="view-page">
+        <!-- Sidebar Navigation -->
         <div class="sidebar">
             <div class="brand-header">🛡️ Trust+</div>
             <ul class="nav-list">
-                <li class="nav-item" onclick="showView('frontPage')">📊 Front Grid</li>
+                <li class="nav-item" onclick="showView('frontPage')">📊 Dashboard</li>
                 <li class="nav-item active">📥 Submissions <span class="badge">22</span></li>
                 <li class="nav-item">👁️ Review Queue <span class="badge">12</span></li>
-                <li class="nav-item">✅ Approved</li>
-                <li class="nav-item">❌ Rejected</li>
+                <li class="nav-item">✅ Approved <span class="badge" style="background:#15803d;">144</span></li>
+                <li class="nav-item">❌ Rejected <span class="badge" style="background:#b91c1c;">18</span></li>
+                <li class="nav-item">🏢 Companies</li>
+                <li class="nav-item">📁 Categories</li>
+                <li class="nav-item">⚙️ Settings</li>
             </ul>
         </div>
 
-        <div class="dash-content">
-            <div style="margin-bottom: 20px;">
-                <a class="back-btn" onclick="showView('companyDetailPage')">← Back to Company Public Detail View</a>
+        <!-- Main Dashboard View -->
+        <div class="dash-main-area">
+            <div class="dash-top-bar">
+                <a class="back-link" onclick="showView('frontPage')">← Back to Submissions</a>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">Form ID: #9kqQLSxMguQJSV...</span>
             </div>
-            <h2>Admin Review Console</h2>
-            <p style="color: var(--text-muted); margin-top: 8px;">Review, verify and override company evaluation scores.</p>
-            
-            <div class="action-bar" style="margin-top: 40px;">
-                <button class="btn btn-approve" onclick="showView('frontPage')">Approve Submission</button>
-                <button class="btn btn-reject" onclick="showView('frontPage')">Reject Submission</button>
+
+            <!-- Top Header Card -->
+            <div class="header-card">
+                <div class="header-left">
+                    <div class="company-icon" id="dashLogo">T</div>
+                    <div>
+                        <h2 id="dashCompanyName" style="font-size: 1.3rem;">TechNova Solutions</h2>
+                        <div id="dashMeta" style="color: var(--text-muted); font-size: 0.82rem; margin-top: 2px;">technova.com • Technology • 50 - 100 Employees</div>
+                    </div>
+                </div>
+                <div class="overall-score-tag">
+                    <div class="stars">★★★★☆</div>
+                    <div class="score-val"><span id="dashScore">4.2</span> <span style="font-size: 0.9rem; color: #94a3b8;">/ 5</span></div>
+                </div>
+            </div>
+
+            <!-- Grid Layout matching Photo 2 -->
+            <div class="dash-grid-layout">
+                <!-- Evaluation Sections Left Panel -->
+                <div class="section-cards">
+                    <!-- 1. Fair minimum wage -->
+                    <div class="eval-card">
+                        <div class="eval-card-left">
+                            <div class="icon-box bg-green">💰</div>
+                            <div>
+                                <div class="card-title">1. Fair minimum wage</div>
+                                <div class="card-subtitle">(Overload - Required qualification)</div>
+                                <ul class="card-bullets">
+                                    <li>Overload gives 1.5 minimum wage</li>
+                                    <li>Required qualification gives 1.5 minimum wage</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div class="stars">★★★★☆</div>
+                            <strong style="font-size: 0.85rem;">4.2 / 5</strong>
+                        </div>
+                    </div>
+
+                    <!-- 2. (Profitshare) -->
+                    <div class="eval-card">
+                        <div class="eval-card-left">
+                            <div class="icon-box bg-purple">📊</div>
+                            <div>
+                                <div class="card-title">2. (Profitshare)</div>
+                                <ul class="card-bullets" style="margin-top: 4px;">
+                                    <li>Gives profitshare for minimum 10%</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div class="stars">★★★★☆</div>
+                            <strong style="font-size: 0.85rem;">4.0 / 5</strong>
+                        </div>
+                    </div>
+
+                    <!-- 3. Working hours (overtime) -->
+                    <div class="eval-card">
+                        <div class="eval-card-left">
+                            <div class="icon-box bg-blue">🕒</div>
+                            <div>
+                                <div class="card-title">3. Working hours (overtime)</div>
+                                <ul class="card-bullets" style="margin-top: 4px;">
+                                    <li>Overtime the hour by 1.5x for maximum 12 hours</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div class="stars">★★★★☆</div>
+                            <strong style="font-size: 0.85rem;">4.2 / 5</strong>
+                        </div>
+                    </div>
+
+                    <!-- 4. Discrimination in work force -->
+                    <div class="eval-card">
+                        <div class="eval-card-left">
+                            <div class="icon-box bg-red">👥</div>
+                            <div>
+                                <div class="card-title">4. Discrimination in work force</div>
+                                <ul class="card-bullets" style="margin-top: 4px;">
+                                    <li>Employs 20% minimum for women or men</li>
+                                    <li>Employs 20% minimum for older people than 40 years</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div class="stars">★★★★☆</div>
+                            <strong style="font-size: 0.85rem;">4.0 / 5</strong>
+                        </div>
+                    </div>
+
+                    <!-- 5. Insurance , Securities and Pensions -->
+                    <div class="eval-card">
+                        <div class="eval-card-left">
+                            <div class="icon-box bg-teal">🛡️</div>
+                            <div>
+                                <div class="card-title">5. Insurance , Securities and Pensions</div>
+                                <ul class="card-bullets" style="margin-top: 4px;">
+                                    <li>Pays health care</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div class="stars">★★★☆☆</div>
+                            <strong style="font-size: 0.85rem;">3.8 / 5</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reviewer Decision Right Panel -->
+                <div class="right-panel-box">
+                    <div class="decision-title">Reviewer Decision</div>
+                    <div class="action-btns">
+                        <button class="btn btn-approve" onclick="showView('frontPage')">✓ Approve</button>
+                        <button class="btn btn-reject" onclick="showView('frontPage')">✕ Reject</button>
+                    </div>
+                    
+                    <div style="margin-top: 10px;">
+                        <label style="font-size: 0.75rem; font-weight: 600; color: #64748b;">Reviewer Notes</label>
+                        <textarea placeholder="Add notes about this submission..." style="width: 100%; height: 80px; margin-top: 4px; padding: 8px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.8rem; outline: none;"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bottom-actions">
+                <button class="btn btn-approve" onclick="showView('frontPage')">Approve Company</button>
+                <button class="btn btn-reject" onclick="showView('frontPage')">Reject Company</button>
             </div>
         </div>
     </div>
 
-    <!-- Script Handling Transitions & Ktor REST API Fetch -->
+    <!-- Script Handling View Transitions & Data Integration -->
     <script>
         let currentCategory = 'All';
 
@@ -528,12 +540,12 @@
             document.getElementById(viewId).classList.add('active');
         }
 
-        function openCompanyDetails(companyName, category, score) {
-            document.getElementById('pubCompanyName').innerText = companyName;
-            document.getElementById('pubMeta').innerText = `${category} • Live API Data`;
-            document.getElementById('pubScore').innerText = score.toFixed(1);
-            document.getElementById('pubLogo').innerText = companyName.charAt(0).toUpperCase();
-            showView('companyDetailPage');
+        function openDashboard(companyName, category, score) {
+            document.getElementById('dashCompanyName').innerText = companyName;
+            document.getElementById('dashMeta').innerText = `${category} • Live Ktor Backend Entry`;
+            document.getElementById('dashScore').innerText = score.toFixed(1);
+            document.getElementById('dashLogo').innerText = companyName.charAt(0).toUpperCase();
+            showView('dashboardPage');
         }
 
         async function fetchCompanies() {
@@ -565,7 +577,7 @@
             }
 
             listEl.innerHTML = filtered.map(c => `
-                <div class="company-row" onclick="openCompanyDetails('${c.name}', '${c.category}', ${c.score})">
+                <div class="company-row" onclick="openDashboard('${c.name}', '${c.category}', ${c.score})">
                     <div>
                         <strong style="font-size: 0.95rem;">${c.name}</strong>
                         <div style="font-size: 0.8rem; color: #64748b;">${c.category} • ${c.reviewsCount} reviews</div>
