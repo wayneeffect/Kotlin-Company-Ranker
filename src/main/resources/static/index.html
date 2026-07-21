@@ -32,7 +32,6 @@
             overflow-x: hidden;
         }
 
-        /* View Switching */
         .view-page {
             display: none;
             width: 100%;
@@ -43,9 +42,7 @@
             display: flex;
         }
 
-        /* ============================================== */
-        /* PHOTO 1: FRONT PAGE GRID                       */
-        /* ============================================== */
+        /* FRONT PAGE GRID */
         #frontPage {
             justify-content: center;
             padding: 40px 16px;
@@ -130,138 +127,82 @@
         .company-row:hover { background-color: #f8fafc; }
         .company-row:last-child { border-bottom: none; }
 
-        /* ============================================== */
-        /* PHOTO 2: TRUST+ ADMIN DASHBOARD                */
-        /* ============================================== */
-        #dashboardPage {
-            flex-direction: row;
+        /* COMPANY EVALUATION PAGE */
+        #companyDetailPage {
+            justify-content: center;
+            padding: 40px 16px;
         }
 
-        .sidebar {
-            width: 220px;
-            background-color: var(--sidebar-bg);
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            padding: 20px 0;
-            flex-shrink: 0;
+        .detail-container {
+            width: 100%;
+            max-width: 600px;
         }
 
-        .brand-header {
-            padding: 0 20px 20px 20px;
-            border-bottom: 1px solid #1e293b;
-            font-size: 1.1rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .nav-list { list-style: none; margin-top: 12px; }
-
-        .nav-item {
-            padding: 10px 20px;
-            font-size: 0.85rem;
-            color: #94a3b8;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .nav-item:hover, .nav-item.active {
-            background-color: var(--sidebar-accent);
-            color: #ffffff;
-        }
-
-        .badge {
-            background: #1e3a8a;
-            color: #bfdbfe;
-            font-size: 0.7rem;
-            padding: 2px 6px;
-            border-radius: 10px;
-        }
-
-        .dash-main-area {
-            flex-grow: 1;
-            padding: 20px 28px;
-            overflow-y: auto;
-            background-color: #f8fafc;
-        }
-
-        .dash-top-bar {
+        .back-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
-        .back-link {
+        .back-btn {
             color: var(--sidebar-accent);
-            text-decoration: none;
-            font-size: 0.85rem;
             font-weight: 600;
+            font-size: 0.9rem;
             cursor: pointer;
+            text-decoration: none;
         }
 
-        .dash-grid-layout {
-            display: grid;
-            grid-template-columns: 1fr 300px;
-            gap: 20px;
-        }
-
-        .header-card {
+        .public-company-card {
             background: var(--card-bg);
-            border-radius: 12px;
+            border-radius: 16px;
             padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
             border: 1px solid var(--border-color);
             margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .header-left { display: flex; align-items: center; gap: 16px; }
+        .company-meta-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
 
-        .company-icon {
-            width: 52px;
-            height: 52px;
-            background: var(--sidebar-bg);
+        .company-logo-circle {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background: #2563eb;
             color: #fff;
-            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: bold;
         }
 
-        .overall-score-tag {
-            text-align: right;
-        }
+        .topic-card-list { display: grid; gap: 12px; }
 
-        .stars { color: var(--star-gold); font-size: 1.1rem; }
-        .score-val { font-size: 1.6rem; font-weight: 800; }
-
-        /* Evaluation Cards Layout */
-        .section-cards { display: grid; gap: 14px; }
-
-        .eval-card {
+        .topic-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 16px 20px;
+            border-radius: 16px;
+            padding: 16px;
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
         }
 
-        .eval-card-left { display: flex; gap: 14px; align-items: flex-start; }
+        .topic-card-left { display: flex; align-items: flex-start; gap: 14px; }
 
-        .icon-box {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
+        .topic-icon-bg {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -275,67 +216,31 @@
         .bg-red { background-color: #ffe4e6; }
         .bg-teal { background-color: #ccfbf1; }
 
-        .card-title { font-weight: 700; font-size: 0.95rem; }
-        .card-subtitle { font-size: 0.82rem; font-weight: 600; color: #475569; margin: 2px 0 6px 0; }
+        .topic-title { font-weight: 700; font-size: 0.95rem; }
+        .topic-sub { font-size: 0.8rem; font-weight: 600; color: #64748b; margin-bottom: 6px; }
         
-        .card-bullets { list-style: none; padding-left: 0; }
-        .card-bullets li {
+        .topic-bullets { list-style: none; padding-left: 0; }
+        .topic-bullets li {
             font-size: 0.8rem;
             color: var(--text-muted);
             position: relative;
             padding-left: 12px;
             margin-bottom: 2px;
         }
-        .card-bullets li::before { content: "•"; position: absolute; left: 0; color: #94a3b8; }
+        .topic-bullets li::before { content: "•"; position: absolute; left: 0; color: #94a3b8; }
 
-        /* Right Side Controls */
-        .right-panel-box {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
+        .footer-note {
+            margin-top: 20px;
             display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .decision-title { font-size: 0.9rem; font-weight: 700; margin-bottom: 8px; }
-
-        .action-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-
-        .btn {
-            padding: 10px;
-            border-radius: 8px;
-            border: none;
-            font-weight: 600;
-            font-size: 0.85rem;
-            cursor: pointer;
-            color: white;
-            text-align: center;
-        }
-
-        .btn-approve { background-color: var(--green-btn); }
-        .btn-reject { background-color: var(--red-btn); }
-
-        .bottom-actions {
-            position: fixed;
-            bottom: 0;
-            right: 0;
-            left: 220px;
-            background: #ffffff;
-            border-top: 1px solid var(--border-color);
-            padding: 12px 28px;
-            display: flex;
-            justify-content: flex-end;
-            gap: 12px;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: #94a3b8;
         }
     </style>
 </head>
 <body>
 
-    <!-- ============================================== -->
-    <!-- PHOTO 1: FRONT PAGE CATEGORY GRID              -->
-    <!-- ============================================== -->
+    <!-- FRONT PAGE -->
     <div id="frontPage" class="view-page active">
         <div class="front-container">
             <div class="search-container">
@@ -344,29 +249,30 @@
                 <span>🌪️</span>
             </div>
 
-            <!-- Complete 19 Category Blocks -->
+            <!-- 19 Category Icons -->
             <div class="category-grid" id="categoryGrid">
                 <div class="category-card active" data-category="All"><div class="icon">🌐</div><div class="label">All</div></div>
-                <div class="category-card" data-category="Construction and real estate"><div class="icon">🏗️</div><div class="label">Construction and real estate</div></div>
-                <div class="category-card" data-category="Hospitals and clinics"><div class="icon">🏥</div><div class="label">Hospitals and clinics</div></div>
-                <div class="category-card" data-category="Schools and centers"><div class="icon">🏫</div><div class="label">Schools and centers</div></div>
+                <div class="category-card" data-category="Construction and real estate"><div class="icon">🏗️</div><div class="label">Construction and Real estate</div></div>
+                <div class="category-card" data-category="Hospitals and clinics"><div class="icon">🏥</div><div class="label">Hospitals and Clinics</div></div>
+                <div class="category-card" data-category="Schools and centers"><div class="icon">🏫</div><div class="label">Schools and Centers</div></div>
                 <div class="category-card" data-category="Restaurants"><div class="icon">🍽️</div><div class="label">Restaurants</div></div>
-                <div class="category-card" data-category="Banks, insurance, exchange and brokerage"><div class="icon">🏦</div><div class="label">Banks, insurance, exchange and brokerage</div></div>
-                <div class="category-card" data-category="Retail and online shopping"><div class="icon">🛒</div><div class="label">Retail and online shopping</div></div>
+                <div class="category-card" data-category="Banks, insurance, exchange and brokerage"><div class="icon">🏦</div><div class="label">Banks, Insurance, Exchange and Brokerage</div></div>
+                <div class="category-card" data-category="Retail and online shopping"><div class="icon">🛒</div><div class="label">Retail and Online shopping</div></div>
                 <div class="category-card" data-category="Clothes"><div class="icon">👕</div><div class="label">Clothes</div></div>
                 <div class="category-card" data-category="Farms"><div class="icon">🚜</div><div class="label">Farms</div></div>
                 <div class="category-card" data-category="Home appliances"><div class="icon">🧊</div><div class="label">Home appliances</div></div>
                 <div class="category-card" data-category="Public firms"><div class="icon">🏛️</div><div class="label">Public firms</div></div>
                 <div class="category-card" data-category="International companies"><div class="icon">🌍</div><div class="label">International companies</div></div>
                 <div class="category-card" data-category="Heavy industries"><div class="icon">🏭</div><div class="label">Heavy industries</div></div>
-                <div class="category-card" data-category="Communication, software and hardware"><div class="icon">💻</div><div class="label">Communication, software and hardware</div></div>
-                <div class="category-card" data-category="Petrochemicals and fertelizers"><div class="icon">🛢️</div><div class="label">Petrochemicals and fertelizers</div></div>
-                <div class="category-card" data-category="Tourism and hotels"><div class="icon">🏨</div><div class="label">Tourism and hotels</div></div>
-                <div class="category-card" data-category="Cars and transportation"><div class="icon">🚗</div><div class="label">Cars and transportation</div></div>
+                <div class="category-card" data-category="Communication, software and hardware"><div class="icon">💻</div><div class="label">Communication, Software and Hardware</div></div>
+                <div class="category-card" data-category="Petrochemicals and fertelizers"><div class="icon">🛢️</div><div class="label">Petrochemicals and Fertelizers</div></div>
+                <div class="category-card" data-category="Tourism and hotels"><div class="icon">🏨</div><div class="label">Tourism and Hotels</div></div>
+                <div class="category-card" data-category="Cars and transportation"><div class="icon">🚗</div><div class="label">Cars and Transportation</div></div>
                 <div class="category-card" data-category="Administrative offices"><div class="icon">🪑</div><div class="label">Administrative offices</div></div>
                 <div class="category-card" data-category="Other"><div class="icon">📦</div><div class="label">Other</div></div>
             </div>
 
+            <!-- Ranked Companies List -->
             <div class="company-results-box">
                 <h3 style="margin-bottom: 12px; font-size: 1rem;">Ranked Companies</h3>
                 <div id="companyList"></div>
@@ -375,164 +281,133 @@
     </div>
 
 
-    <!-- ============================================== -->
-    <!-- PHOTO 2: TRUST+ ADMIN DASHBOARD VIEW           -->
-    <!-- ============================================== -->
-    <div id="dashboardPage" class="view-page">
-        <!-- Sidebar Navigation -->
-        <div class="sidebar">
-            <div class="brand-header">🛡️ Trust+</div>
-            <ul class="nav-list">
-                <li class="nav-item" onclick="showView('frontPage')">📊 Dashboard</li>
-                <li class="nav-item active">📥 Submissions <span class="badge">22</span></li>
-                <li class="nav-item">👁️ Review Queue <span class="badge">12</span></li>
-                <li class="nav-item">✅ Approved <span class="badge" style="background:#15803d;">144</span></li>
-                <li class="nav-item">❌ Rejected <span class="badge" style="background:#b91c1c;">18</span></li>
-                <li class="nav-item">🏢 Companies</li>
-                <li class="nav-item">📁 Categories</li>
-                <li class="nav-item">⚙️ Settings</li>
-            </ul>
-        </div>
-
-        <!-- Main Dashboard View -->
-        <div class="dash-main-area">
-            <div class="dash-top-bar">
-                <a class="back-link" onclick="showView('frontPage')">← Back to Submissions</a>
-                <span style="font-size: 0.8rem; color: var(--text-muted);">Form ID: #9kqQLSxMguQJSV...</span>
+    <!-- PUBLIC COMPANY EVALUATION DETAILS -->
+    <div id="companyDetailPage" class="view-page">
+        <div class="detail-container">
+            <div class="back-nav">
+                <a class="back-btn" onclick="showView('frontPage')">← Back to Category List</a>
             </div>
 
-            <!-- Top Header Card -->
-            <div class="header-card">
-                <div class="header-left">
-                    <div class="company-icon" id="dashLogo">T</div>
+            <div class="public-company-card">
+                <div class="company-meta-left">
+                    <div class="company-logo-circle" id="pubLogo">♾️</div>
                     <div>
-                        <h2 id="dashCompanyName" style="font-size: 1.3rem;">TechNova Solutions</h2>
-                        <div id="dashMeta" style="color: var(--text-muted); font-size: 0.82rem; margin-top: 2px;">technova.com • Technology • 50 - 100 Employees</div>
+                        <h2 id="pubCompanyName" style="font-size: 1.25rem;">Meta Platforms, Inc.</h2>
+                        <div id="pubMeta" style="color: var(--text-muted); font-size: 0.8rem;">Menlo Park, California, USA • Technology, Social Media</div>
                     </div>
                 </div>
-                <div class="overall-score-tag">
-                    <div class="stars">★★★★☆</div>
-                    <div class="score-val"><span id="dashScore">4.2</span> <span style="font-size: 0.9rem; color: #94a3b8;">/ 5</span></div>
+                <div style="text-align: right;">
+                    <div style="font-size: 1.5rem; font-weight: 800;"><span id="pubScore">4.0</span> <span style="font-size: 0.9rem; color: #94a3b8;">/ 5</span></div>
+                    <div style="color: #fbbf24; font-size: 0.9rem;">★★★★☆</div>
+                    <div style="color: #16a34a; font-size: 0.75rem; font-weight: 700;">Very Good</div>
                 </div>
             </div>
 
-            <!-- Grid Layout matching Photo 2 -->
-            <div class="dash-grid-layout">
-                <!-- Evaluation Sections Left Panel -->
-                <div class="section-cards">
-                    <!-- 1. Fair minimum wage -->
-                    <div class="eval-card">
-                        <div class="eval-card-left">
-                            <div class="icon-box bg-green">💰</div>
-                            <div>
-                                <div class="card-title">1. Fair minimum wage</div>
-                                <div class="card-subtitle">(Overload - Required qualification)</div>
-                                <ul class="card-bullets">
-                                    <li>Overload gives 1.5 minimum wage</li>
-                                    <li>Required qualification gives 1.5 minimum wage</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div style="text-align: right;">
-                            <div class="stars">★★★★☆</div>
-                            <strong style="font-size: 0.85rem;">4.2 / 5</strong>
+            <div class="topic-card-list">
+                <!-- Topic 1 -->
+                <div class="topic-card">
+                    <div class="topic-card-left">
+                        <div class="topic-icon-bg bg-green">💰</div>
+                        <div>
+                            <div class="topic-title">1. Fair minimum wage</div>
+                            <div class="topic-sub">(Overload - Required qualification)</div>
+                            <ul class="topic-bullets">
+                                <li>Overload gives 1.5 minimum wage</li>
+                                <li>Required qualification gives 1.5 minimum wage</li>
+                            </ul>
                         </div>
                     </div>
-
-                    <!-- 2. (Profitshare) -->
-                    <div class="eval-card">
-                        <div class="eval-card-left">
-                            <div class="icon-box bg-purple">📊</div>
-                            <div>
-                                <div class="card-title">2. (Profitshare)</div>
-                                <ul class="card-bullets" style="margin-top: 4px;">
-                                    <li>Gives profitshare for minimum 10%</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div style="text-align: right;">
-                            <div class="stars">★★★★☆</div>
-                            <strong style="font-size: 0.85rem;">4.0 / 5</strong>
-                        </div>
-                    </div>
-
-                    <!-- 3. Working hours (overtime) -->
-                    <div class="eval-card">
-                        <div class="eval-card-left">
-                            <div class="icon-box bg-blue">🕒</div>
-                            <div>
-                                <div class="card-title">3. Working hours (overtime)</div>
-                                <ul class="card-bullets" style="margin-top: 4px;">
-                                    <li>Overtime the hour by 1.5x for maximum 12 hours</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div style="text-align: right;">
-                            <div class="stars">★★★★☆</div>
-                            <strong style="font-size: 0.85rem;">4.2 / 5</strong>
-                        </div>
-                    </div>
-
-                    <!-- 4. Discrimination in work force -->
-                    <div class="eval-card">
-                        <div class="eval-card-left">
-                            <div class="icon-box bg-red">👥</div>
-                            <div>
-                                <div class="card-title">4. Discrimination in work force</div>
-                                <ul class="card-bullets" style="margin-top: 4px;">
-                                    <li>Employs 20% minimum for women or men</li>
-                                    <li>Employs 20% minimum for older people than 40 years</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div style="text-align: right;">
-                            <div class="stars">★★★★☆</div>
-                            <strong style="font-size: 0.85rem;">4.0 / 5</strong>
-                        </div>
-                    </div>
-
-                    <!-- 5. Insurance , Securities and Pensions -->
-                    <div class="eval-card">
-                        <div class="eval-card-left">
-                            <div class="icon-box bg-teal">🛡️</div>
-                            <div>
-                                <div class="card-title">5. Insurance , Securities and Pensions</div>
-                                <ul class="card-bullets" style="margin-top: 4px;">
-                                    <li>Pays health care</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div style="text-align: right;">
-                            <div class="stars">★★★☆☆</div>
-                            <strong style="font-size: 0.85rem;">3.8 / 5</strong>
-                        </div>
+                    <div style="text-align: right;">
+                        <div style="color: #fbbf24; font-size: 0.9rem;">★★★★☆</div>
+                        <div style="font-weight: 700; font-size: 0.85rem;">4.0 / 5</div>
                     </div>
                 </div>
 
-                <!-- Reviewer Decision Right Panel -->
-                <div class="right-panel-box">
-                    <div class="decision-title">Reviewer Decision</div>
-                    <div class="action-btns">
-                        <button class="btn btn-approve" onclick="showView('frontPage')">✓ Approve</button>
-                        <button class="btn btn-reject" onclick="showView('frontPage')">✕ Reject</button>
+                <!-- Topic 2 -->
+                <div class="topic-card">
+                    <div class="topic-card-left">
+                        <div class="topic-icon-bg bg-purple">📊</div>
+                        <div>
+                            <div class="topic-title">2. (Profitshare)</div>
+                            <ul class="topic-bullets" style="margin-top: 4px;">
+                                <li>Gives profitshare for minimum 10%</li>
+                            </ul>
+                        </div>
                     </div>
-                    
-                    <div style="margin-top: 10px;">
-                        <label style="font-size: 0.75rem; font-weight: 600; color: #64748b;">Reviewer Notes</label>
-                        <textarea placeholder="Add notes about this submission..." style="width: 100%; height: 80px; margin-top: 4px; padding: 8px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.8rem; outline: none;"></textarea>
+                    <div style="text-align: right;">
+                        <div style="color: #fbbf24; font-size: 0.9rem;">★★★★☆</div>
+                        <div style="font-weight: 700; font-size: 0.85rem;">4.0 / 5</div>
+                    </div>
+                </div>
+
+                <!-- Topic 3 -->
+                <div class="topic-card">
+                    <div class="topic-card-left">
+                        <div class="topic-icon-bg bg-blue">🕒</div>
+                        <div>
+                            <div class="topic-title">3. Working hours (overtime)</div>
+                            <ul class="topic-bullets" style="margin-top: 4px;">
+                                <li>Overtime the hour by 1.5x for maximum 12 hours</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="color: #fbbf24; font-size: 0.9rem;">★★★★☆</div>
+                        <div style="font-weight: 700; font-size: 0.85rem;">4.0 / 5</div>
+                    </div>
+                </div>
+
+                <!-- Topic 4 -->
+                <div class="topic-card">
+                    <div class="topic-card-left">
+                        <div class="topic-icon-bg bg-red">👥</div>
+                        <div>
+                            <div class="topic-title">4. Discrimination in work force</div>
+                            <ul class="topic-bullets" style="margin-top: 4px;">
+                                <li>Employs 20% minimum for women or men</li>
+                                <li>Employs 20% minimum for older people than 40 years</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="color: #fbbf24; font-size: 0.9rem;">★★★★☆</div>
+                        <div style="font-weight: 700; font-size: 0.85rem;">4.0 / 5</div>
+                    </div>
+                </div>
+
+                <!-- Topic 5 -->
+                <div class="topic-card">
+                    <div class="topic-card-left">
+                        <div class="topic-icon-bg bg-teal">🛡️</div>
+                        <div>
+                            <div class="topic-title">5. Insurance , Securities and Pensions</div>
+                            <ul class="topic-bullets" style="margin-top: 4px;">
+                                <li>Pays health care</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="color: #fbbf24; font-size: 0.9rem;">★★★★☆</div>
+                        <div style="font-weight: 700; font-size: 0.85rem;">4.0 / 5</div>
                     </div>
                 </div>
             </div>
 
-            <div class="bottom-actions">
-                <button class="btn btn-approve" onclick="showView('frontPage')">Approve Company</button>
-                <button class="btn btn-reject" onclick="showView('frontPage')">Reject Company</button>
+            <div class="footer-note">
+                <span>ℹ️ Overall rating is based on employee reviews and public data.</span>
+                <span>Last updated: May 19, 2024</span>
             </div>
         </div>
     </div>
 
-    <!-- Script Handling View Transitions & Data Integration -->
     <script>
+        // Fallback default list if rest endpoint isn't connected yet
+        const defaultCompanies = [
+            { id: 1, name: "Meta Platforms, Inc.", category: "Communication, software and hardware", location: "Menlo Park, California, USA", score: 4.0, reviewsCount: 3420 },
+            { id: 2, name: "Acme Corp", category: "Communication, software and hardware", location: "New York, USA", score: 4.8, reviewsCount: 120 },
+            { id: 3, name: "Globex", category: "Heavy industries", location: "Chicago, USA", score: 4.2, reviewsCount: 85 }
+        ];
+
         let currentCategory = 'All';
 
         function showView(viewId) {
@@ -540,12 +415,12 @@
             document.getElementById(viewId).classList.add('active');
         }
 
-        function openDashboard(companyName, category, score) {
-            document.getElementById('dashCompanyName').innerText = companyName;
-            document.getElementById('dashMeta').innerText = `${category} • Live Ktor Backend Entry`;
-            document.getElementById('dashScore').innerText = score.toFixed(1);
-            document.getElementById('dashLogo').innerText = companyName.charAt(0).toUpperCase();
-            showView('dashboardPage');
+        function openCompanyDetails(company) {
+            document.getElementById('pubCompanyName').innerText = company.name;
+            document.getElementById('pubMeta').innerText = `${company.location || 'USA'} • ${company.category}`;
+            document.getElementById('pubScore').innerText = company.score.toFixed(1);
+            document.getElementById('pubLogo').innerText = company.name.includes("Meta") ? "♾️" : company.name.charAt(0);
+            showView('companyDetailPage');
         }
 
         async function fetchCompanies() {
@@ -555,10 +430,12 @@
                     : `/api/companies?category=${encodeURIComponent(currentCategory)}`;
                 
                 const response = await fetch(url);
+                if (!response.ok) throw new Error("API Offline");
                 const companies = await response.json();
                 renderList(companies);
             } catch (err) {
-                console.error('Failed to load companies:', err);
+                // Render local list if server API is initializing
+                renderList(defaultCompanies);
             }
         }
 
@@ -566,10 +443,14 @@
             const listEl = document.getElementById('companyList');
             const searchVal = document.getElementById('searchInput').value.toLowerCase();
             
-            const filtered = companies.filter(c => 
+            let filtered = companies.filter(c => 
                 c.name.toLowerCase().includes(searchVal) || 
                 c.category.toLowerCase().includes(searchVal)
             );
+
+            if (currentCategory !== 'All') {
+                filtered = filtered.filter(c => c.category.toLowerCase() === currentCategory.toLowerCase());
+            }
 
             if (filtered.length === 0) {
                 listEl.innerHTML = '<div style="padding: 12px 0; color: #94a3b8;">No companies found.</div>';
@@ -577,12 +458,12 @@
             }
 
             listEl.innerHTML = filtered.map(c => `
-                <div class="company-row" onclick="openDashboard('${c.name}', '${c.category}', ${c.score})">
+                <div class="company-row" onclick='openCompanyDetails(${JSON.stringify(c)})'>
                     <div>
                         <strong style="font-size: 0.95rem;">${c.name}</strong>
                         <div style="font-size: 0.8rem; color: #64748b;">${c.category} • ${c.reviewsCount} reviews</div>
                     </div>
-                    <div style="background: #fef08a; color: #854d0e; font-weight: 700; font-size: 0.85rem; padding: 4px 8px; border-radius: 6px;">
+                    <div style="background: #2563eb; color: #ffffff; font-weight: 700; font-size: 0.85rem; padding: 4px 10px; border-radius: 6px;">
                         ★ ${c.score.toFixed(1)}
                     </div>
                 </div>
