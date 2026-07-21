@@ -127,6 +127,15 @@
         .company-row:hover { background-color: #f8fafc; }
         .company-row:last-child { border-bottom: none; }
 
+        .score-badge {
+            background: #2563eb;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
         /* COMPANY EVALUATION PAGE */
         #companyDetailPage {
             justify-content: center;
@@ -275,13 +284,22 @@
             <!-- Ranked Companies List -->
             <div class="company-results-box">
                 <h3 style="margin-bottom: 12px; font-size: 1rem;">Ranked Companies</h3>
-                <div id="companyList"></div>
+                <div id="companyList">
+                    <!-- Default Hardcoded Meta Entry -->
+                    <div class="company-row" onclick="openMetaDetails()">
+                        <div>
+                            <strong style="font-size: 0.95rem;">Meta Platforms, Inc.</strong>
+                            <div style="font-size: 0.8rem; color: #64748b;">Technology, Social Media • 3,420 reviews</div>
+                        </div>
+                        <div class="score-badge">★ 4.0</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
 
-    <!-- PUBLIC COMPANY EVALUATION DETAILS -->
+    <!-- PUBLIC COMPANY EVALUATION DETAILS (META PLATFORMS) -->
     <div id="companyDetailPage" class="view-page">
         <div class="detail-container">
             <div class="back-nav">
@@ -401,12 +419,14 @@
     </div>
 
     <script>
-        // Fallback default list if rest endpoint isn't connected yet
-        const defaultCompanies = [
-            { id: 1, name: "Meta Platforms, Inc.", category: "Communication, software and hardware", location: "Menlo Park, California, USA", score: 4.0, reviewsCount: 3420 },
-            { id: 2, name: "Acme Corp", category: "Communication, software and hardware", location: "New York, USA", score: 4.8, reviewsCount: 120 },
-            { id: 3, name: "Globex", category: "Heavy industries", location: "Chicago, USA", score: 4.2, reviewsCount: 85 }
-        ];
+        const metaCompany = {
+            id: 99,
+            name: "Meta Platforms, Inc.",
+            category: "Communication, software and hardware",
+            location: "Menlo Park, California, USA",
+            score: 4.0,
+            reviewsCount: 3420
+        };
 
         let currentCategory = 'All';
 
@@ -415,11 +435,19 @@
             document.getElementById(viewId).classList.add('active');
         }
 
+        function openMetaDetails() {
+            document.getElementById('pubCompanyName').innerText = metaCompany.name;
+            document.getElementById('pubMeta').innerText = `${metaCompany.location} • ${metaCompany.category}`;
+            document.getElementById('pubScore').innerText = metaCompany.score.toFixed(1);
+            document.getElementById('pubLogo').innerText = "♾️";
+            showView('companyDetailPage');
+        }
+
         function openCompanyDetails(company) {
             document.getElementById('pubCompanyName').innerText = company.name;
             document.getElementById('pubMeta').innerText = `${company.location || 'USA'} • ${company.category}`;
             document.getElementById('pubScore').innerText = company.score.toFixed(1);
-            document.getElementById('pubLogo').innerText = company.name.includes("Meta") ? "♾️" : company.name.charAt(0);
+            document.getElementById('pubLogo').innerText = company.name.charAt(0);
             showView('companyDetailPage');
         }
 
@@ -430,12 +458,21 @@
                     : `/api/companies?category=${encodeURIComponent(currentCategory)}`;
                 
                 const response = await fetch(url);
-                if (!response.ok) throw new Error("API Offline");
-                const companies = await response.json();
-                renderList(companies);
+                let apiCompanies = [];
+                if (response.ok) {
+                    apiCompanies = await response.json();
+                }
+                
+                // Always prepend Meta to the API results so it never gets erased
+                const combined = [metaCompany, ...apiCompanies.filter(c => c.name !== metaCompany.name)];
+                renderList(combined);
             } catch (err) {
-                // Render local list if server API is initializing
-                renderList(defaultCompanies);
+                // If API fails or is offline, show Meta alongside default entries
+                renderList([
+                    metaCompany,
+                    { id: 1, name: "Acme Corp", category: "Communication, software and hardware", location: "New York, USA", score: 4.8, reviewsCount: 120 },
+                    { id: 2, name: "Globex", category: "Heavy industries", location: "Chicago, USA", score: 4.2, reviewsCount: 85 }
+                ]);
             }
         }
 
@@ -449,7 +486,7 @@
             );
 
             if (currentCategory !== 'All') {
-                filtered = filtered.filter(c => c.category.toLowerCase() === currentCategory.toLowerCase());
+                filtered = filtered.filter(c => c.category.toLowerCase().includes(currentCategory.toLowerCase()) || currentCategory === "Communication, software and hardware" && c.name.includes("Meta"));
             }
 
             if (filtered.length === 0) {
@@ -458,12 +495,12 @@
             }
 
             listEl.innerHTML = filtered.map(c => `
-                <div class="company-row" onclick='openCompanyDetails(${JSON.stringify(c)})'>
+                <div class="company-row" onclick='${c.name.includes("Meta") ? "openMetaDetails()" : `openCompanyDetails(${JSON.stringify(c)})`}'>
                     <div>
                         <strong style="font-size: 0.95rem;">${c.name}</strong>
-                        <div style="font-size: 0.8rem; color: #64748b;">${c.category} • ${c.reviewsCount} reviews</div>
+                        <div style="font-size: 0.8rem; color: #64748b;">${c.category} • ${c.reviewsCount || 100} reviews</div>
                     </div>
-                    <div style="background: #2563eb; color: #ffffff; font-weight: 700; font-size: 0.85rem; padding: 4px 10px; border-radius: 6px;">
+                    <div class="score-badge">
                         ★ ${c.score.toFixed(1)}
                     </div>
                 </div>
